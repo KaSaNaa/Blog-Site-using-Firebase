@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PostPage from "./components/Postpage";
 import FindQuestionPage from "./components/FindQuestionpage";
-import LoginPage from "./components/auth/Login";
-import SignUpPage from "./components/auth/Signup";
-import LoginSuccess from "./components/auth/LoginSuccess";
-import HomePage from "./components/home/homepage";
+import HomePage from "./components/home/HomePage";
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
+import SignOut from "./components/auth/SignOut";
+import { handleGoogleSignIn, handleGithubSignIn, handleEmailSignIn } from "./services/authService";
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
       <Routes>
         <Route path="/post-something" element={<PostPage />} />
         <Route path="/find-questions" element={<FindQuestionPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/home" element={<LoginSuccess />} />
+        <Route path="/signin" element={<SignIn handleEmailSignIn={handleEmailSignIn} handleGoogleSignIn={handleGoogleSignIn} handleGithubSignIn={handleGithubSignIn} />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signout" element={<SignOut />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </Router>
