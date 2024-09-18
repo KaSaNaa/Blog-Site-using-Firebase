@@ -8,18 +8,18 @@ import Footer from "./Footer";
 
 const HomePage = () => {
   return (
-      <Box
-        sx={{
-          minHeight: "100vh",
-        }}
-      >
-        <NavBar />
-        <HeaderImg />
-        <FeaturedArticles />
-        <FeaturedTutorials />
-        <SubscribeForm />
-        <Footer />
-      </Box>
+    <Box
+      sx={{
+        minHeight: "100vh",
+      }}
+    >
+      <NavBar />
+      <HeaderImg />
+      <FeaturedArticles />
+      <FeaturedTutorials />
+      <SubscribeForm />
+      <Footer />
+    </Box>
   );
 };
 
