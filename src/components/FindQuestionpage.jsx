@@ -26,7 +26,7 @@ const FindQuestionPage = () => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/");
+    navigate("/post-something");
   }
 
   useEffect(() => {
