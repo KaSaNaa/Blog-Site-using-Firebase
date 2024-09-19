@@ -13,6 +13,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../configs/firebaseConfigs';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -61,11 +63,16 @@ function NavBar() {
     navigate('/signin');
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    alert('Signed out successfully');
-    navigate('/');
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      alert('Signed out successfully');
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+      alert('Error signing out');
+    }
   };
 
   return (
