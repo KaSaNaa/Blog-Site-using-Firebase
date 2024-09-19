@@ -6,9 +6,9 @@ export const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-  // Initialize user state from sessionStorage
+  // Initialize user state from Firebase key in sessionStorage
   const [user, setUser] = useState(() => {
-    const storedUser = sessionStorage.getItem('user');
+    const storedUser = sessionStorage.getItem('firebase:authUser:AIzaSyCbj5GPq-JQ12AJSeB8WBkTavwv8-xz4WU:[DEFAULT]');
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
@@ -19,15 +19,6 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
-
-  // Update sessionStorage whenever user state changes
-  useEffect(() => {
-    if (user) {
-      sessionStorage.setItem('user', JSON.stringify(user));
-    } else {
-      sessionStorage.removeItem('user');
-    }
-  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
