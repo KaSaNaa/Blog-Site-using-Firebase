@@ -17,7 +17,7 @@ function dataGenerator(size) {
     const author = faker.person.fullName();
     data.push({
       id: i,
-      title: `Article ${i}`,
+      title: `Tutorial ${i}`,
       image: url,
       author: author,
       description: desc,
