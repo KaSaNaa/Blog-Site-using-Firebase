@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Container,
   Button,
-  TextField,
   Box,
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
+  TextField,
   Snackbar,
   Alert,
+  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { db, storage } from "../configs/firebaseConfigs";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { AuthContext } from "../contexts/AuthContext";
+import { addPost } from "../services/PostService";
 
 const PostPage = () => {
   const [postType, setPostType] = useState("question");
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleNavigate = () => {
     navigate("/find-questions");
+  };
+
+  const handlePostSubmit = async (postData) => {
+    if (!user) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    try {
+      await addPost(postType, postData, user.uid);
+      console.log(`${postType} posted successfully!`);
+    } catch (error) {
+      console.error(`Error posting ${postType}: `, error);
+    }
   };
 
   return (
@@ -31,7 +45,11 @@ const PostPage = () => {
         </Button>
       </Box>
       <PostTypeSelector postType={postType} setPostType={setPostType} />
-      {postType === "question" ? <QuestionPost /> : <ArticlePost />}
+      {postType === "question" ? (
+        <QuestionPost onSubmit={handlePostSubmit} />
+      ) : (
+        <ArticlePost onSubmit={handlePostSubmit} />
+      )}
     </Container>
   );
 };
@@ -63,7 +81,8 @@ const PostTypeSelector = ({ postType, setPostType }) => {
   );
 };
 
-const QuestionPost = () => {
+// eslint-disable-next-line react/prop-types
+const QuestionPost = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
@@ -73,23 +92,16 @@ const QuestionPost = () => {
 
   const handleSubmit = async () => {
     try {
-      await addDoc(collection(db, "questions"), {
-        title,
-        description,
-        tags,
-        date: new Date(),
-      });
-
+      await onSubmit({ title, description, tags });
       setTitle("");
       setDescription("");
       setTags("");
       setSnackbarMessage("Question posted successfully!");
       setSnackbarSeverity("success");
-      console.log("Question posted successfully!");
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setSnackbarMessage("Error posting question.");
       setSnackbarSeverity("error");
-      console.error("Error adding document: ", error);
     } finally {
       setSnackbarOpen(true);
     }
@@ -146,7 +158,8 @@ const QuestionPost = () => {
   );
 };
 
-const ArticlePost = () => {
+// eslint-disable-next-line react/prop-types
+const ArticlePost = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [abstract, setAbstract] = useState("");
   const [articleText, setArticleText] = useState("");
@@ -159,23 +172,7 @@ const ArticlePost = () => {
 
   const handleSubmit = async () => {
     try {
-      let imageUrl = "";
-      if (image) {
-        const storageRef = ref(storage, `images/${image.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, image);
-        await uploadTask;
-        imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
-      }
-
-      await addDoc(collection(db, "articles"), {
-        title,
-        abstract,
-        articleText,
-        tags,
-        imageUrl,
-        date: new Date(),
-      });
-
+      await onSubmit({ title, abstract, articleText, tags, image });
       setTitle("");
       setAbstract("");
       setArticleText("");
@@ -184,11 +181,10 @@ const ArticlePost = () => {
       setImageName("");
       setSnackbarMessage("Article posted successfully!");
       setSnackbarSeverity("success");
-      console.log("Article posted successfully!");
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setSnackbarMessage("Error posting article.");
       setSnackbarSeverity("error");
-      console.error("Error adding document: ", error);
     } finally {
       setSnackbarOpen(true);
     }
