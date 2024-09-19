@@ -1,14 +1,31 @@
-import { useState } from "react";
-import { Typography, TextField, Button, Box, Container, Grid, Divider } from "@mui/material";
+import { useContext, useState } from "react";
+import {
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Container,
+  Grid,
+  Divider,
+} from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { handleEmailSignUp, handleGoogleSignIn, handleGithubSignIn } from "../../services/authService";
+import useAuth from "../../services/authentication"; // Adjust the path to your custom hook
+import { Link, Navigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { handleEmailSignUp, handleGoogleSignIn, handleGithubSignIn } =
+    useAuth();
+  const { user } = useContext(AuthContext);
+  
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +35,11 @@ const SignUp = () => {
   return (
     <Container maxWidth="sm">
       <Box sx={{ textAlign: "center", mt: 4 }}>
-        <Typography variant="h4" gutterBottom sx={{ color: "#333", fontWeight: "bold" }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ color: "#333", fontWeight: "bold" }}
+        >
           Sign Up
         </Typography>
         <Typography variant="subtitle1" gutterBottom sx={{ color: "#666" }}>
@@ -52,13 +73,26 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Sign up with Email
               </Button>
             </Grid>
           </Grid>
         </form>
-        <Divider sx={{ my: 3 }}><Typography>OR</Typography></Divider>
+        <Box sx={{ textAlign: "center", mt: 4 }}>
+          <Typography variant="subtitle1" gutterBottom sx={{ color: "#666" }}>
+            Already a user?&nbsp;
+            <Link to="/signin">Sign in</Link>
+          </Typography>
+        </Box>
+        <Divider sx={{ my: 3 }}>
+          <Typography>OR</Typography>
+        </Divider>
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12}>
             <Button
@@ -66,9 +100,13 @@ const SignUp = () => {
               fullWidth
               startIcon={<GitHubIcon />}
               onClick={handleGithubSignIn}
-              sx={{ backgroundColor: "#333", color: "#fff", "&:hover": { backgroundColor: "#24292e" } }}
+              sx={{
+                backgroundColor: "#333",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#24292e" },
+              }}
             >
-              Sign in with GitHub
+              Sign up with GitHub
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -77,9 +115,13 @@ const SignUp = () => {
               fullWidth
               startIcon={<GoogleIcon />}
               onClick={handleGoogleSignIn}
-              sx={{ backgroundColor: "#4285F4", color: "#fff", "&:hover": { backgroundColor: "#357ae8" } }}
+              sx={{
+                backgroundColor: "#4285F4",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#357ae8" },
+              }}
             >
-              Sign in with Google
+              Sign up with Google
             </Button>
           </Grid>
         </Grid>
