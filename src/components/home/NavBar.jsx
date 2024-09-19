@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -12,6 +12,7 @@ import { styled, alpha } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -54,17 +55,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function NavBar() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const { user, setUser } = useContext(AuthContext);
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/signin');
   };
 
   const handleSignOut = () => {
