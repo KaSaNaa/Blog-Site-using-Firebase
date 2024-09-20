@@ -13,9 +13,16 @@ import {
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { addPost } from "../services/posts";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../configs/firebaseConfigs";
+import { Oval } from "react-loader-spinner";
 
 const PostPage = () => {
   const [postType, setPostType] = useState("question");
+  const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
@@ -29,27 +36,94 @@ const PostPage = () => {
       return;
     }
 
+    // Validation logic
+    if (!postData.title || !postData.description || !postData.tags) {
+      setSnackbarMessage("All fields are required.");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      await addPost(postType, postData, user.uid);
+      let imageUrl = null;
+      if (postData.image) {
+        const imageRef = ref(storage, `images/${postData.image.name}`);
+        const snapshot = await uploadBytes(imageRef, postData.image);
+        imageUrl = await getDownloadURL(snapshot.ref);
+      }
+
+      const postWithImageUrl = { ...postData, image: imageUrl };
+      await addPost(postType, postWithImageUrl, user.uid);
+      setLoading(false);
+      setSnackbarMessage("Post submitted successfully!");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
+      handleNavigate();
       console.log(`${postType} posted successfully!`);
     } catch (error) {
       console.error(`Error posting ${postType}: `, error);
+      setLoading(false);
+      setSnackbarMessage("Error submitting post.");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     }
   };
 
   return (
     <Container>
-      <Box my={2}>
-        <Button variant="contained" color="primary" onClick={handleNavigate}>
-          Find Questions
-        </Button>
-      </Box>
-      <PostTypeSelector postType={postType} setPostType={setPostType} />
-      {postType === "question" ? (
-        <QuestionPost onSubmit={handlePostSubmit} />
-      ) : (
-        <ArticlePost onSubmit={handlePostSubmit} />
+      {loading && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          zIndex: 9999,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <Oval
+            height={80}
+            width={80}
+            color="#4fa94d"
+            visible={true}
+            ariaLabel='oval-loading'
+            secondaryColor="#4fa94d"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+          <Typography variant="h6" color="textSecondary" style={{ marginTop: '20px' }}>
+            Uploading Post...
+          </Typography>
+        </div>
       )}
+      <div style={{ filter: loading ? 'blur(5px)' : 'none' }}>
+        <Box my={2}>
+          <Button variant="contained" color="primary" onClick={handleNavigate}>
+            Find Questions
+          </Button>
+        </Box>
+        <PostTypeSelector postType={postType} setPostType={setPostType} />
+        {postType === "question" ? (
+          <QuestionPost onSubmit={handlePostSubmit} />
+        ) : (
+          <ArticlePost onSubmit={handlePostSubmit} />
+        )}
+      </div>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
@@ -92,13 +166,20 @@ const QuestionPost = ({ onSubmit }) => {
 
   const handleSubmit = async () => {
     try {
+      if (!title || !description || !tags) {
+        setSnackbarMessage("All fields are required.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
+        return;
+      }
+
       await onSubmit({ title, description, tags });
       setTitle("");
       setDescription("");
       setTags("");
       setSnackbarMessage("Question posted successfully!");
       setSnackbarSeverity("success");
-    // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setSnackbarMessage("Error posting question.");
       setSnackbarSeverity("error");
@@ -172,6 +253,13 @@ const ArticlePost = ({ onSubmit }) => {
 
   const handleSubmit = async () => {
     try {
+      if (!title || !abstract || !articleText || !tags) {
+        setSnackbarMessage("All fields are required.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
+        return;
+      }
+
       await onSubmit({ title, abstract, articleText, tags, image });
       setTitle("");
       setAbstract("");
@@ -181,7 +269,7 @@ const ArticlePost = ({ onSubmit }) => {
       setImageName("");
       setSnackbarMessage("Article posted successfully!");
       setSnackbarSeverity("success");
-    // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setSnackbarMessage("Error posting article.");
       setSnackbarSeverity("error");
@@ -265,7 +353,6 @@ const ArticlePost = ({ onSubmit }) => {
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
       >
         <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity}>
           {snackbarMessage}
