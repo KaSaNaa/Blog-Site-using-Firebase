@@ -3,7 +3,7 @@ import PostPage from "./components/Postpage";
 import FindQuestionPage from "./components/FindQuestionpage";
 import HomePage from "./components/home/HomePage";
 import SignIn from "./components/auth/SignIn";
-import SignUp from "./components/auth/SignUp.jsx";
+import SignUp from "./components/auth/SignUp";
 import SignOut from "./components/auth/SignOut";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 // eslint-disable-next-line no-unused-vars
