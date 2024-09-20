@@ -38,11 +38,11 @@ const SignUp = () => {
         <Typography
           variant="h4"
           gutterBottom
-          sx={{ color: "#333", fontWeight: "bold" }}
+          sx={{ fontWeight: "bold" }}
         >
           Sign Up
         </Typography>
-        <Typography variant="subtitle1" gutterBottom sx={{ color: "#666" }}>
+        <Typography variant="subtitle1" gutterBottom>
           Create your account to get started
         </Typography>
         <Divider sx={{ my: 3 }} />
