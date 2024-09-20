@@ -4,22 +4,36 @@ import {CssBaseline, ThemeProvider} from "@mui/material";
 import {darkTheme, lightTheme} from "./theme/theme";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import { lazy, Suspense } from "react";
+import { Oval } from "react-loader-spinner";
 
-const lazyImport = (path) => lazy(() => import(`${path}`));
-
-const SignUp = lazyImport("./components/auth/SignUp");
-const PostPage = lazyImport("./components/Postpage");
-const FindQuestionPage = lazyImport("./components/FindQuestionpage");
-const HomePage = lazyImport("./components/home/HomePage");
-const SignIn = lazyImport("./components/auth/SignIn");
-const SignOut = lazyImport("./components/auth/SignOut");
+const SignUp = lazy(() => import("./components/auth/SignUp"));
+const PostPage = lazy(() => import("./components/Postpage"));
+const FindQuestionPage = lazy(() => import("./components/FindQuestionpage"));
+const HomePage = lazy(() => import("./components/home/HomePage"));
+const SignIn = lazy(() => import("./components/auth/SignIn"));
+const SignOut = lazy(() => import("./components/auth/SignOut"));
 
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <Oval
+            height={80}
+            width={80}
+            color="lightblue"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel='oval-loading'
+            secondaryColor="grey"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      }>
         <Routes>
           <Route path="/post-something" element={<PrivateRoute><PostPage /></PrivateRoute>} />
           <Route path="/find-questions" element={<PrivateRoute><FindQuestionPage /></PrivateRoute>} />
