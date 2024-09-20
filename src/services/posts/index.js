@@ -1,5 +1,5 @@
 // src/services/PostService.js
-import { db } from "../configs/firebaseConfigs";
+import { db } from "../../configs/firebaseConfigs";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 
 export const addPost = async (postType, postData, uid) => {
