@@ -17,6 +17,7 @@ const useAuth = () => {
       await setPersistence(auth, browserSessionPersistence);
       const result = await signInWithPopup(auth, googleProvider);
       setUser(result.user);
+      
       alert("Signed in with Google");
     } catch (error) {
       console.error("Error signing in with Google:", error);
