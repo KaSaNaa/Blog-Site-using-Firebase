@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { addPost } from "../services/PostService";
+import { addPost } from "../services/posts";
 
 const PostPage = () => {
   const [postType, setPostType] = useState("question");
