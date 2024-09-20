@@ -31,7 +31,7 @@ exports.sendWelcomeEmail = functions.https.onRequest((req, res) => {
         const email = req.body.email;
 
         const mailOptions = {
-            from: process.env.EMAIL,
+            from: "Dev@Deakin",
             to: email,
             subject: "Welcome to Dev@Deakin",
             text: "Thank you for subscribing to our newsletter!",
