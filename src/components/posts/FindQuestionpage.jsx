@@ -15,7 +15,7 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { getFunctions, httpsCallable } from "firebase/functions"; // Import Firebase Functions
 import { db } from "../../configs/firebaseConfigs";
 import { useNavigate } from "react-router-dom";
@@ -58,15 +58,6 @@ const FindQuestionPage = () => {
 
     fetchQuestions();
   }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteDoc(doc(db, "questions", id));
-      setQuestions(questions.filter((question) => question.id !== id));
-    } catch (error) {
-      console.error("Error deleting question: ", error);
-    }
-  };
 
   const filteredQuestions = questions.filter((question) => {
     if (filterType === "title") {
@@ -121,13 +112,6 @@ const FindQuestionPage = () => {
                   Posted by: {question.displayName} on{" "}
                   {new Date(question.date.seconds * 1000).toLocaleDateString()}
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => handleDelete(question.id)}
-                >
-                  Delete
-                </Button>
               </CardContent>
             </AccordionDetails>
           </Accordion>
