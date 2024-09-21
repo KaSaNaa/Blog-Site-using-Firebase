@@ -5,34 +5,55 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Divider } from "@mui/material";
-import { faker } from "@faker-js/faker";
-
-function dataGenerator(size) {
-  const data = [];
-  for (let i = 0; i < size; i++) {
-    const url = faker.image.url();
-    const desc = faker.lorem.sentence();
-    const author = faker.person.fullName();
-    data.push({
-      id: i,
-      title: `Article ${i}`,
-      image: url,
-      author: author,
-      description: desc,
-    });
-  }
-  return JSON.stringify(data);
-}
+import { db, functions } from "../../configs/firebaseConfigs"; // Ensure functions is imported correctly
+import { collection, getDocs } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+import ColorThief from "color-thief"; // Import ColorThief
 
 export default function FeaturedArticles() {
+  const [articles, setArticles] = useState([]);
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "articles"));
+        const articlesData = await Promise.all(
+          querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const getUserDisplayName = httpsCallable(functions, "getUserDisplayName");
+            const userDetails = await getUserDisplayName({ uid: data.uid });
+            return { id: doc.id, ...data, author: userDetails.data.displayName };
+          })
+        );
+        setArticles(articlesData);
+      } catch (error) {
+        console.error("Error fetching articles: ", error);
+      }
+    };
+
+    fetchArticles();
+  }, []);
 
   const handleToggleShowAll = () => {
     setShowAll(!showAll);
   };
-  const articles = JSON.parse(dataGenerator(10));
+
+  const getDominantColor = (imageSrc) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = imageSrc;
+      img.onload = () => {
+        const colorThief = new ColorThief();
+        const dominantColor = colorThief.getColor(img);
+        resolve(`rgb(${dominantColor.join(",")})`);
+      };
+    });
+  };
+
   const displayedArticles = showAll ? articles : articles.slice(0, 6);
 
   return (
@@ -54,6 +75,11 @@ export default function FeaturedArticles() {
                   height="140"
                   image={article.image}
                   alt={article.title}
+                  sx={{ objectFit: "contain" }}
+                  onLoad={async (e) => {
+                    const bgColor = await getDominantColor(article.image);
+                    e.target.style.backgroundColor = bgColor;
+                  }}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -87,4 +113,3 @@ export default function FeaturedArticles() {
     </div>
   );
 }
-
