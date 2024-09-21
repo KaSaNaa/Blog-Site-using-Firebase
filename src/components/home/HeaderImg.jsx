@@ -1,30 +1,26 @@
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardMedia from '@mui/material/CardMedia';
-import { faker } from '@faker-js/faker';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Card from "@mui/material/Card";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LogoSvg from "../../assets/logo.svg";
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
   },
 });
-
-const imgUrl = faker.image.urlLoremFlickr();
 
 export default function HeaderImg() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <Card sx={{ maxWidth: '100%', height: '350px', margin: '20px' }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            image={imgUrl}
-            alt="green iguana"
-            style={{ objectFit: 'cover', objectPosition: 'center', height: '100%', width: '100%' }}
-          />
-        </CardActionArea>
-      </Card>
+      <Card
+        sx={{
+          maxWidth: "100%",
+          height: "350px",
+          margin: "20px",
+          padding: "80px",
+          backgroundSize: "50%",
+          background: `url(${LogoSvg}) no-repeat center/cover`,
+        }}
+      />
     </ThemeProvider>
   );
 }
