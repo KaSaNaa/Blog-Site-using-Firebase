@@ -4,11 +4,11 @@ import {CssBaseline, ThemeProvider} from "@mui/material";
 import {darkTheme, lightTheme} from "./theme/theme";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import { lazy, Suspense } from "react";
-import { Oval } from "react-loader-spinner";
+import Spinner from "./components/misc/Spinner";
 
 const SignUp = lazy(() => import("./components/auth/SignUp"));
-const PostPage = lazy(() => import("./components/Postpage"));
-const FindQuestionPage = lazy(() => import("./components/FindQuestionpage"));
+const PostPage = lazy(() => import("./components/posts/Postpage"));
+const FindQuestionPage = lazy(() => import("./components/posts/FindQuestionpage"));
 const HomePage = lazy(() => import("./components/home/HomePage"));
 const SignIn = lazy(() => import("./components/auth/SignIn"));
 const SignOut = lazy(() => import("./components/auth/SignOut"));
@@ -19,20 +19,7 @@ function App() {
       <CssBaseline />
       <Router>
       <Suspense fallback={
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <Oval
-            height={80}
-            width={80}
-            color="lightblue"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel='oval-loading'
-            secondaryColor="grey"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
-        </div>
+        <Spinner color="#4fa94d" text="Dev@Deakin is loading..." />
       }>
         <Routes>
           <Route path="/post-something" element={<PrivateRoute><PostPage /></PrivateRoute>} />
