@@ -107,7 +107,7 @@ const FindQuestionPage = () => {
             </AccordionSummary>
             <AccordionDetails>
               <CardContent>
-                <Typography>{question.description}</Typography>
+                <Typography gutterBottom={true}>{question.description}</Typography>
                 <Typography variant="body2" color="textSecondary">
                   Posted by: {question.displayName} on{" "}
                   {new Date(question.date.seconds * 1000).toLocaleDateString()}
