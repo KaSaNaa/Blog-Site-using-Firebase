@@ -48,7 +48,7 @@ export default function FeaturedArticles() {
   const displayedArticles = showAll ? articles : articles.slice(0, 6);
 
   if (loading) {
-    return <Spinner />; // Show spinner while loading
+    return <Spinner text="Fetching articles from the cloud..." />; // Show spinner while loading
   }
 
   return (

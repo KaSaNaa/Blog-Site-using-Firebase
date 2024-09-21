@@ -54,7 +54,7 @@ export default function FeaturedTutorials() {
   const displayedArticles = showAll ? articles : articles.slice(0, 6);
 
   if (loading) {
-    return <Spinner />; // Show spinner while loading
+    return <Spinner text="Loading YouTube Tutorials..." />; // Show spinner while loading
   }
 
   return (

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-export const ProgressSpinner = () => {
+export const ProgressSpinner = ({text = "Loading..."}) => {
   return (
     <Box
       sx={{
@@ -14,9 +14,20 @@ export const ProgressSpinner = () => {
         height: '100vh',
       }}
     >
+    <Typography
+        variant="h6"
+        color="textSecondary"
+        style={{ marginTop: "20px" }}
+      >
+        {text}
+      </Typography>
       <CircularProgress />
     </Box>
   );
+};
+
+ProgressSpinner.propTypes = {
+  text: PropTypes.string,
 };
 
 const Spinner = ({ color = "#4fa94d", text = "Loading..." }) => {
