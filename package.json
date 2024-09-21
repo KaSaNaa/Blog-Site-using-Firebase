@@ -12,8 +12,10 @@
   "dependencies": {
     "@emotion/styled": "^11.13.0",
     "@faker-js/faker": "^9.0.0",
+    "@googleapis/youtube": "^20.0.0",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
+    "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "firebase": "^10.13.1",
     "react": "^18.3.1",

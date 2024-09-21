@@ -16,11 +16,9 @@ const HomePage = () => {
     {/* TODO: add necessary Nav Bar links */}
       <NavBar /> 
       <HeaderImg />
-      {/* TODO: load featured articles and questions */}
       <FeaturedArticles />
       <FeaturedTutorials />
       <SubscribeForm />
-      {/* TODO: update footer */}
       <Footer />
     </Box>
   );
