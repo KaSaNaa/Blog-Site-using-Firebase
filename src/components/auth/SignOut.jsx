@@ -16,7 +16,6 @@ const SignOut = () => {
       alert("Error signing out");
     }
   };
-// TODO: add two steps to sign out instead of immediately signing out.
   return (
     <Box>
       <Typography variant="h4">Sign Out</Typography>
