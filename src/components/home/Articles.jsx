@@ -11,10 +11,12 @@ import { db } from "../../configs/firebaseConfigs";
 import { collection, getDocs } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../configs/firebaseConfigs";
+import { ProgressSpinner as Spinner } from "../misc/Spinner";
 
 export default function FeaturedArticles() {
   const [articles, setArticles] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -31,6 +33,8 @@ export default function FeaturedArticles() {
         setArticles(articlesData);
       } catch (error) {
         console.error("Error fetching articles: ", error);
+      } finally {
+        setLoading(false); // Set loading to false after data is fetched
       }
     };
 
@@ -42,6 +46,10 @@ export default function FeaturedArticles() {
   };
 
   const displayedArticles = showAll ? articles : articles.slice(0, 6);
+
+  if (loading) {
+    return <Spinner />; // Show spinner while loading
+  }
 
   return (
     <div style={{ marginTop: '5%'}}>

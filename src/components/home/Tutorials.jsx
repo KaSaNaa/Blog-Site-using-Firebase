@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { Box, Divider } from "@mui/material";
+import { ProgressSpinner as Spinner } from "../misc/Spinner";
 
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY; // Replace with your YouTube API key
 
@@ -35,11 +36,13 @@ async function fetchYouTubeVideos() {
 export default function FeaturedTutorials() {
   const [showAll, setShowAll] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const fetchData = async () => {
       const videos = await fetchYouTubeVideos();
       setArticles(videos);
+      setLoading(false); // Set loading to false after data is fetched
     };
     fetchData();
   }, []);
@@ -49,6 +52,10 @@ export default function FeaturedTutorials() {
   };
 
   const displayedArticles = showAll ? articles : articles.slice(0, 6);
+
+  if (loading) {
+    return <Spinner />; // Show spinner while loading
+  }
 
   return (
     <div style={{ marginTop: '5%' }}>

@@ -1,6 +1,23 @@
 import { Oval } from "react-loader-spinner";
 import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
+export const ProgressSpinner = () => {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      }}
+    >
+      <CircularProgress />
+    </Box>
+  );
+};
 
 const Spinner = ({ color = "#4fa94d", text = "Loading..." }) => {
   return (
