@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /**
  * Import function triggers from their respective submodules:
@@ -8,7 +9,6 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-// eslint-disable-next-line no-unused-vars
 const { onRequest } = require("firebase-functions/v2/https");
 const firebaseFunctions = require("firebase-functions");
 const nodemailer = require("nodemailer");
@@ -20,19 +20,19 @@ const admin = require("firebase-admin");
 
 admin.initializeApp();
 
-// eslint-disable-next-line no-unused-vars
-const getUserDisplayName = functions.https.onCall(async (data, context) => {
-  const { uid } = data;
-  try {
-    const userRecord = await admin.auth().getUser(uid);
-    return { displayName: userRecord.displayName };
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw new functions.https.HttpsError("internal", "Unable to fetch user data");
-  }
+// Function to get user display name
+const getUserDisplayName = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
+    const { uid } = req.body;
+    try {
+      const userRecord = await admin.auth().getUser(uid);
+      res.status(200).json({ displayName: userRecord.displayName });
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      res.status(500).json({ error: "Unable to fetch user data" });
+    }
+  });
 });
-
-module.exports = { getUserDisplayName };
 
 // Configure the email transport using the default SMTP transport and a GMail account.
 // For Gmail, enable "less secure apps" in your account settings.
@@ -45,7 +45,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Cloud Function to send email
-exports.sendWelcomeEmail = firebaseFunctions.https.onRequest((req, res) => {
+const sendWelcomeEmail = firebaseFunctions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const email = req.body.email;
 
@@ -66,3 +66,9 @@ exports.sendWelcomeEmail = firebaseFunctions.https.onRequest((req, res) => {
     });
   });
 });
+
+// Export all functions
+module.exports = {
+  getUserDisplayName,
+  sendWelcomeEmail,
+};

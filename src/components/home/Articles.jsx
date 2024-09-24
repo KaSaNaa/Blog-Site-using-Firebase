@@ -9,8 +9,7 @@ import { useState, useEffect } from "react";
 import { Box, Divider } from "@mui/material";
 import { db } from "../../configs/firebaseConfigs";
 import { collection, getDocs } from "firebase/firestore";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../configs/firebaseConfigs";
+import axios from "axios"; // Import Axios
 import { ProgressSpinner as Spinner } from "../misc/Spinner";
 
 export default function FeaturedArticles() {
@@ -25,9 +24,12 @@ export default function FeaturedArticles() {
         const articlesData = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
-            const getUserDisplayName = httpsCallable(functions, "getUserDisplayName");
-            const userDetails = await getUserDisplayName({ uid: data.uid });
-            return { id: doc.id, ...data, author: userDetails.data.displayName };
+            const response = await axios.post(
+              "https://us-central1-devdeakinlogin.cloudfunctions.net/getUserDisplayName",
+              { uid: data.uid }
+            );
+            const userDetails = response.data;
+            return { id: doc.id, ...data, author: userDetails.displayName };
           })
         );
         setArticles(articlesData);
