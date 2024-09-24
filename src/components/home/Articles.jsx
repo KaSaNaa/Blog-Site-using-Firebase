@@ -25,7 +25,7 @@ export default function FeaturedArticles() {
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
             const response = await axios.post(
-              "https://us-central1-devdeakinlogin.cloudfunctions.net/getUserDisplayName",
+              import.meta.env.VITE_GET_USER_DISPLAY_NAME,
               { uid: data.uid }
             );
             const userDetails = response.data;

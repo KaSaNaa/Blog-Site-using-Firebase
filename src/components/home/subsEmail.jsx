@@ -15,7 +15,7 @@ export default function SubscribeForm() {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://us-central1-devdeakinlogin.cloudfunctions.net/sendWelcomeEmail", {
+      const response = await fetch(import.meta.env.VITE_SEND_WELCOME_EMAIL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

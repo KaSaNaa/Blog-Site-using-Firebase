@@ -23,7 +23,7 @@ const QuestionView = ({ question }) => {
     const fetchDisplayName = async (uid) => {
       try {
         const response = await axios.post(
-          "https://us-central1-devdeakinlogin.cloudfunctions.net/getUserDisplayName",
+            import.meta.env.VITE_GET_USER_DISPLAY_NAME,
           { uid }
         );
         return response.data.displayName;
