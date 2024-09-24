@@ -4,7 +4,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import axios from "axios"; // Import Axios
+import fetchUserDisplayName from "../../utils/fetchUserDisplayName.js";
 
 const AnswerForm = ({ questionId, onAnswerSubmit }) => {
   const [answer, setAnswer] = useState("");
@@ -14,11 +14,8 @@ const AnswerForm = ({ questionId, onAnswerSubmit }) => {
   useEffect(() => {
     const fetchDisplayName = async () => {
       try {
-        const response = await axios.post(
-          import.meta.env.VITE_GET_USER_DISPLAY_NAME,
-          { uid: user.uid }
-        );
-        setDisplayName(response.data.displayName);
+        const displayName = await fetchUserDisplayName(user.uid); // Use the utility function
+        setDisplayName(displayName);
       } catch (error) {
         console.error("Error fetching user display name:", error);
       }
