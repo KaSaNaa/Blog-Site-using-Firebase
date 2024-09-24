@@ -13,8 +13,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../configs/firebaseConfigs";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../misc/Spinner";
-import QuestionView from "./QuestionView"; // Import the QuestionView component
-import axios from "axios"; // Import Axios
+import QuestionView from "./QuestionView";
+import fetchUserDisplayName from "../../utils/fetchUserDisplayName";
 
 const FindQuestionPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -29,19 +29,13 @@ const FindQuestionPage = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      setLoading(true);
       try {
         const querySnapshot = await getDocs(collection(db, "questions"));
-
         const questionsWithUserDetails = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
-            const response = await axios.post(
-              import.meta.env.VITE_GET_USER_DISPLAY_NAME,
-              { uid: data.uid }
-            );
-            const userDetails = response.data;
-            return { id: doc.id, ...data, displayName: userDetails.displayName };
+            const displayName = await fetchUserDisplayName(data.uid); // Use the utility function
+            return { id: doc.id, ...data, displayName };
           })
         );
         setQuestions(questionsWithUserDetails);

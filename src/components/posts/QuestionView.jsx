@@ -12,7 +12,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AnswerForm from "./AnswerForm";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../configs/firebaseConfigs";
-import axios from "axios"; // Import Axios
+import fetchUserDisplayName from "../../utils/fetchUserDisplayName"; // Import the utility function
 
 const QuestionView = ({ question }) => {
   const [answers, setAnswers] = useState([]);
@@ -20,19 +20,6 @@ const QuestionView = ({ question }) => {
   const [questionDisplayName, setQuestionDisplayName] = useState("");
 
   useEffect(() => {
-    const fetchDisplayName = async (uid) => {
-      try {
-        const response = await axios.post(
-            import.meta.env.VITE_GET_USER_DISPLAY_NAME,
-          { uid }
-        );
-        return response.data.displayName;
-      } catch (error) {
-        console.error("Error fetching user display name:", error);
-        return uid; // Fallback to uid if there's an error
-      }
-    };
-
     const fetchAnswers = async () => {
       if (showAnswers) {
         const q = query(
@@ -43,7 +30,7 @@ const QuestionView = ({ question }) => {
         const answersData = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
-            const displayName = await fetchDisplayName(data.uid);
+            const displayName = await fetchUserDisplayName(data.uid); // Use the utility function
             return { id: doc.id, ...data, displayName };
           })
         );
@@ -52,7 +39,7 @@ const QuestionView = ({ question }) => {
     };
 
     const fetchQuestionDisplayName = async () => {
-      const displayName = await fetchDisplayName(question.uid);
+      const displayName = await fetchUserDisplayName(question.uid); // Use the utility function
       setQuestionDisplayName(displayName);
     };
 
@@ -83,7 +70,7 @@ const QuestionView = ({ question }) => {
               <Typography variant="h6">Answers</Typography>
               {answers.map((answer) => (
                 <Box key={answer.id} mt={2}>
-                  <Typography>{answer.answer}</Typography>
+                  <Typography sx={{ gutterBottom:true }}>{answer.answer}</Typography>
                   <Typography variant="body2" color="textSecondary">
                     Posted by: {answer.displayName} on{" "}
                     {answer.date && answer.date.seconds
