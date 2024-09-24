@@ -13,7 +13,6 @@ const HomePage = () => {
         minHeight: "100vh",
       }}
     >
-    {/* TODO: add necessary Nav Bar links */}
       <NavBar /> 
       <HeaderImg />
       <FeaturedArticles />
