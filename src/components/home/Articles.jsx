@@ -1,21 +1,16 @@
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import { Box, Divider } from "@mui/material";
+import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, Button, Box, Divider } from "@mui/material";
 import { db } from "../../configs/firebaseConfigs";
 import { collection, getDocs } from "firebase/firestore";
-import axios from "axios"; // Import Axios
 import { ProgressSpinner as Spinner } from "../misc/Spinner";
+import { useNavigate } from "react-router-dom";
+import fetchUserDisplayName from "../../utils/fetchUserDisplayName"; // Import the utility function
 
 export default function FeaturedArticles() {
   const [articles, setArticles] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true); // Add loading state
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -24,12 +19,8 @@ export default function FeaturedArticles() {
         const articlesData = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
-            const response = await axios.post(
-              import.meta.env.VITE_GET_USER_DISPLAY_NAME,
-              { uid: data.uid }
-            );
-            const userDetails = response.data;
-            return { id: doc.id, ...data, author: userDetails.displayName };
+            const displayName = await fetchUserDisplayName(data.uid); // Use the utility function
+            return { id: doc.id, ...data, author: displayName };
           })
         );
         setArticles(articlesData);
@@ -66,7 +57,7 @@ export default function FeaturedArticles() {
         {displayedArticles.map((article) => (
           <Grid item xs={12} sm={6} md={4} key={article.id}>
             <Card sx={{ margin: "70px" }}>
-              <CardActionArea>
+              <CardActionArea onClick={() => navigate(`/article/${article.id}`)}>
                 <CardMedia
                   component="img"
                   height="140"
