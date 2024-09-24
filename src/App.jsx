@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 // eslint-disable-next-line no-unused-vars
-import {darkTheme, lightTheme} from "./theme/theme";
+import {darkTheme, greenTheme, lightTheme, redTheme} from "./theme/theme";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import { lazy, Suspense } from "react";
 import Spinner from "./components/misc/Spinner";
+import ArticleView from "./components/posts/ArticleView";
 
 const SignUp = lazy(() => import("./components/auth/SignUp"));
 const PostPage = lazy(() => import("./components/posts/Postpage"));
@@ -28,6 +29,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/article/:articleId" element={<ArticleView />} />
         </Routes>
         </Suspense>
       </Router>
@@ -36,3 +38,5 @@ function App() {
 }
 
 export default App;
+
+// TODO: Make the chatbot
