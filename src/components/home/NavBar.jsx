@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -9,17 +9,27 @@ import {
   Menu,
   MenuItem,
   Avatar,
+  Select,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../configs/firebaseConfigs";
+import { useThemeContext } from "../../contexts/ThemeContext"; // Correct import
 
 function NavBar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
+  const { theme, changeTheme } = useThemeContext(); // Use ThemeContext
   const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedTheme, setSelectedTheme] = useState(theme.name || "dark");
+
+  useEffect(() => {
+    setSelectedTheme(theme.name); // Synchronize initial theme state
+  }, [theme]);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -49,6 +59,12 @@ function NavBar() {
     }
   };
 
+  const handleThemeChange = (event) => {
+    const selectedTheme = event.target.value;
+    setSelectedTheme(selectedTheme);
+    changeTheme(selectedTheme);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -71,6 +87,24 @@ function NavBar() {
           >
             Dev@Deakin
           </Typography>
+          <FormControl
+            variant="outlined"
+            sx={{ minWidth: 120, marginRight: 2 }}
+          >
+            <InputLabel>Theme</InputLabel>
+            <Select
+              value={selectedTheme}
+              onChange={handleThemeChange}
+              label="Theme"
+              color="inherit"
+            >
+              <MenuItem value="dark">Dark</MenuItem>
+              <MenuItem value="light">Light</MenuItem>
+              <MenuItem value="blue">Blue</MenuItem>
+              <MenuItem value="green">Green</MenuItem>
+              <MenuItem value="red">Red</MenuItem>
+            </Select>
+          </FormControl>
           {user ? (
             <>
               <Avatar
