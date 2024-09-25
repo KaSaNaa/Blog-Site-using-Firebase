@@ -48,109 +48,76 @@ const lightTheme = createTheme({
   },
 });
 
-// Blue Theme
-const blueTheme = createTheme({
+// GitHub Theme
+const githubTheme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     primary: {
-      main: "#2196f3",
+      main: "#24292e",
     },
     secondary: {
-      main: "#03a9f4",
+      main: "#0366d6",
     },
     background: {
-      default: "#e3f2fd",
-      paper: "#bbdefb",
+      default: "#0d1117",
+      paper: "#161b22",
     },
     text: {
-      primary: "#0d47a1",
-      secondary: "#1976d2",
+      primary: "#c9d1d9",
+      secondary: "#8b949e",
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
-    h1: {
-      fontSize: "2.5rem",
-      fontWeight: 700,
-    },
-    h2: {
-      fontSize: "2rem",
-      fontWeight: 700,
-    },
-    body1: {
-      fontSize: "1rem",
-    },
+    fontFamily: "Segoe UI, Helvetica, Arial, sans-serif",
   },
 });
 
-// Green Theme
-const greenTheme = createTheme({
+// Facebook Theme
+const facebookTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#4caf50",
+      main: "#1877f2",
     },
     secondary: {
-      main: "#8bc34a",
+      main: "#42b72a",
     },
     background: {
-      default: "#e8f5e9",
-      paper: "#c8e6c9",
+      default: "#ffffff",
+      paper: "#f0f2f5",
     },
     text: {
-      primary: "#1b5e20",
-      secondary: "#388e3c",
+      primary: "#050505",
+      secondary: "#65676b",
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
-    h1: {
-      fontSize: "2.5rem",
-      fontWeight: 700,
-    },
-    h2: {
-      fontSize: "2rem",
-      fontWeight: 700,
-    },
-    body1: {
-      fontSize: "1rem",
-    },
+    fontFamily: "Helvetica, Arial, sans-serif",
   },
 });
 
-// Red Theme
-const redTheme = createTheme({
+// Twitter Theme
+const tealandGray = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     primary: {
-      main: "#f44336",
+      main: "#008080", // Teal
     },
     secondary: {
-      main: "#e57373",
+      main: "#4f4f4f", // Gray
     },
     background: {
-      default: "#ffebee",
-      paper: "#ffcdd2",
+      default: "#121212",
+      paper: "#1e1e1e",
     },
     text: {
-      primary: "#b71c1c",
-      secondary: "#d32f2f",
+      primary: "#e0f7fa", // Light Teal
+      secondary: "#b0bec5", // Light Gray
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
-    h1: {
-      fontSize: "2.5rem",
-      fontWeight: 700,
-    },
-    h2: {
-      fontSize: "2rem",
-      fontWeight: 700,
-    },
-    body1: {
-      fontSize: "1rem",
-    },
+    fontFamily: "Montserrat, Arial, sans-serif",
   },
 });
 
-export { darkTheme, lightTheme, blueTheme, greenTheme, redTheme };
+export { darkTheme, lightTheme, githubTheme, facebookTheme, tealandGray as twitterTheme };

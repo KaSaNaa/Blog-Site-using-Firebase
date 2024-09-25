@@ -1,6 +1,12 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useContext } from "react";
-import { darkTheme, lightTheme, blueTheme, greenTheme, redTheme } from "../theme/theme";
+import {
+  darkTheme,
+  lightTheme,
+  twitterTheme,
+  facebookTheme,
+  githubTheme,
+} from "../theme/theme";
 
 export const ThemeContext = createContext(); // Export ThemeContext
 
@@ -15,14 +21,14 @@ export const ThemeProvider = ({ children }) => {
       case "light":
         setTheme({ ...lightTheme, name: "light" });
         break;
-      case "blue":
-        setTheme({ ...blueTheme, name: "blue" });
+      case "twitter":
+        setTheme({ ...twitterTheme, name: "twitter" });
         break;
-      case "green":
-        setTheme({ ...greenTheme, name: "green" });
+      case "facebook":
+        setTheme({ ...facebookTheme, name: "facebook" });
         break;
-      case "red":
-        setTheme({ ...redTheme, name: "red" });
+      case "github":
+        setTheme({ ...githubTheme, name: "github" });
         break;
       default:
         setTheme({ ...darkTheme, name: "dark" });

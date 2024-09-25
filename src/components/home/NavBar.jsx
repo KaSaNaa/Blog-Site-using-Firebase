@@ -100,9 +100,9 @@ function NavBar() {
             >
               <MenuItem value="dark">Dark</MenuItem>
               <MenuItem value="light">Light</MenuItem>
-              <MenuItem value="blue">Blue</MenuItem>
-              <MenuItem value="green">Green</MenuItem>
-              <MenuItem value="red">Red</MenuItem>
+              <MenuItem value="twitter">Teal</MenuItem>
+              <MenuItem value="facebook">Facebook</MenuItem>
+              <MenuItem value="github">GitHub</MenuItem>
             </Select>
           </FormControl>
           {user ? (
