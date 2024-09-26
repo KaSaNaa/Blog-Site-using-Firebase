@@ -48,10 +48,10 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#90caf9',
+      main: '#4a148c', // Darker Purple
     },
     secondary: {
-      main: '#f48fb1',
+      main: '#880e4f', // Darker Pink
     },
     background: {
       default: '#121212',
@@ -92,10 +92,10 @@ const githubTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#24292e',
+      main: '#e040fb', // Vibrant Neon Purple
     },
     secondary: {
-      main: '#0366d6',
+      main: '#1e3a8a', // Dark Blue
     },
     background: {
       default: '#0d1117',
@@ -112,20 +112,20 @@ const githubTheme = createTheme({
 // Facebook Theme
 const facebookTheme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#1877f2',
+      main: '#1769e8', // Darker Blue
     },
     secondary: {
-      main: '#42b72a',
+      main: '#1b5e20', // Darker Green
     },
     background: {
-      default: '#ffffff',
-      paper: '#f0f2f5',
+      default: '#121212',
+      paper: '#1d1d1d',
     },
     text: {
-      primary: '#050505',
-      secondary: '#65676b',
+      primary: '#ffffff',
+      secondary: '#b0bec5',
     },
   },
   typography: {
@@ -139,10 +139,10 @@ const twitterTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#008080', // Teal
+      main: '#004d40', // Darker Teal
     },
     secondary: {
-      main: '#4f4f4f', // Gray
+      main: '#263238', // Darker Gray
     },
     background: {
       default: '#121212',

@@ -30,7 +30,7 @@ export const ThemeContext = createContext(); // Export ThemeContext
  * @property {function(string): void} changeTheme - Function to change the theme.
  */
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState({ ...darkTheme, name: 'dark' }); // Ensure theme has a name property
+  const [theme, setTheme] = useState({ ...githubTheme, name: 'github' }); // Ensure theme has a name property
 
   const changeTheme = (themeName) => {
     switch (themeName) {
@@ -50,7 +50,7 @@ export const ThemeProvider = ({ children }) => {
         setTheme({ ...githubTheme, name: 'github' });
         break;
       default:
-        setTheme({ ...darkTheme, name: 'dark' });
+        setTheme({ ...githubTheme, name: 'github' });
     }
   };
 
