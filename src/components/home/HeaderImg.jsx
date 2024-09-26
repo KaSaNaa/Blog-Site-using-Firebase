@@ -27,8 +27,7 @@ export default function HeaderImg() {
           <div key={i} className="bubble"></div>
         ))}
       </div>
-      {/* eslint-disable-next-line react/no-unknown-property */}
-      <style jsx>{`
+      <style>{`
         .animated-header {
           font-family: 'Inter', sans-serif;
           font-size: 2rem;
