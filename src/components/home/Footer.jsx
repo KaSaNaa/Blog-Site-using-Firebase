@@ -14,7 +14,7 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
-          Dev @ Deakin
+          Dev at Deakin
         </Typography>
         <Typography
           variant="subtitle1"
@@ -22,17 +22,17 @@ export default function Footer() {
           color="textSecondary"
           component="p"
         >
-          Some footer content goes here.
+          Empowering developers to innovate and create.
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
-            Link 1
+        <Link href="mailto:contact@devdeakin.com" color="inherit" sx={{ mx: 1 }}>
+            contact@devdeakin.com
           </Link>
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
-            Link 2
+          <Link href="tel:+1234567890" color="inherit" sx={{ mx: 1 }}>
+            +1 (234) 567-890
           </Link>
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
-            Link 3
+          <Link href="https://devdeakin.com/contact" color="inherit" sx={{ mx: 1 }}>
+            Contact Form
           </Link>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
