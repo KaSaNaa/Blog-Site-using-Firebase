@@ -1,5 +1,48 @@
 import { createTheme } from '@mui/material';
 
+const baseTypography = {
+  fontFamily: 'Inter, Arial, sans-serif',
+  h1: {
+    fontWeight: 700,
+  },
+  h2: {
+    fontWeight: 700,
+  },
+  h3: {
+    fontWeight: 600,
+  },
+  h4: {
+    fontWeight: 600,
+  },
+  h5: {
+    fontWeight: 500,
+  },
+  h6: {
+    fontWeight: 500,
+  },
+  subtitle1: {
+    fontWeight: 400,
+  },
+  subtitle2: {
+    fontWeight: 400,
+  },
+  body1: {
+    fontWeight: 400,
+  },
+  body2: {
+    fontWeight: 400,
+  },
+  button: {
+    fontWeight: 600,
+  },
+  caption: {
+    fontWeight: 400,
+  },
+  overline: {
+    fontWeight: 400,
+  },
+};
+
 // Dark Theme
 const darkTheme = createTheme({
   palette: {
@@ -19,9 +62,7 @@ const darkTheme = createTheme({
       secondary: '#b0bec5',
     },
   },
-  typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
-  },
+  typography: baseTypography,
 });
 
 // Light Theme
@@ -43,9 +84,7 @@ const lightTheme = createTheme({
       secondary: '#757575',
     },
   },
-  typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
-  },
+  typography: baseTypography,
 });
 
 // GitHub Theme
@@ -67,9 +106,7 @@ const githubTheme = createTheme({
       secondary: '#8b949e',
     },
   },
-  typography: {
-    fontFamily: 'Segoe UI, Helvetica, Arial, sans-serif',
-  },
+  typography: baseTypography,
 });
 
 // Facebook Theme
@@ -92,12 +129,13 @@ const facebookTheme = createTheme({
     },
   },
   typography: {
+    ...baseTypography,
     fontFamily: 'Helvetica, Arial, sans-serif',
   },
 });
 
 // Twitter Theme
-const tealandGray = createTheme({
+const twitterTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -115,9 +153,7 @@ const tealandGray = createTheme({
       secondary: '#b0bec5', // Light Gray
     },
   },
-  typography: {
-    fontFamily: 'Montserrat, Arial, sans-serif',
-  },
+  typography: baseTypography,
 });
 
 export {
@@ -125,5 +161,5 @@ export {
   lightTheme,
   githubTheme,
   facebookTheme,
-  tealandGray as twitterTheme,
+  twitterTheme,
 };
