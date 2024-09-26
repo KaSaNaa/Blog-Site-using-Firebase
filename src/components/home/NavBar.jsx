@@ -14,7 +14,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../configs/firebaseConfigs";
@@ -85,7 +85,9 @@ function NavBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Dev@Deakin
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Dev@Deakin
+            </Link>
           </Typography>
           <FormControl
             variant="outlined"
