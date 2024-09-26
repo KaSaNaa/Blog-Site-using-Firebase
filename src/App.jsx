@@ -15,6 +15,7 @@ import { ThemeProvider as CustomThemeProvider } from './contexts/ThemeContext';
 import useThemeContext from './hooks/useTheme';
 import GlobalLayout from './GlobalLayout';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
+import FeaturedArticles from './components/home/Articles';
 
 const SignUp = lazy(() => import('./components/auth/SignUp'));
 const PostPage = lazy(() => import('./components/posts/Postpage'));
@@ -53,6 +54,16 @@ function App() {
                   <motion.div {...pageTransition}>
                     <PrivateRoute>
                       <PostPage />
+                    </PrivateRoute>
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/show-articles"
+                element={
+                  <motion.div {...pageTransition}>
+                    <PrivateRoute>
+                      <FeaturedArticles />
                     </PrivateRoute>
                   </motion.div>
                 }
@@ -119,8 +130,6 @@ export default function AppWrapper() {
   return (
     <CustomThemeProvider>
       <LoadingProvider>
-        {' '}
-        {/* Wrap with LoadingProvider */}
         <Router>
           <App />
         </Router>

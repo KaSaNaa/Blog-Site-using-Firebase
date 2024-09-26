@@ -32,7 +32,6 @@ const PostPage = () => {
 
   // eslint-disable-next-line no-unused-vars
   const navShowArticles = () => {
-    // TODO: Navigate to the show articles page
     navigate('/show-articles');
   };
 
@@ -75,8 +74,7 @@ const PostPage = () => {
       if (postType === 'question') {
         navFindQuestions();
       } else {
-        // TODO: Navigate to the show articles page
-        // navShowArticles();
+        navShowArticles();
       }
 
       console.log(`${postType} posted successfully!`);

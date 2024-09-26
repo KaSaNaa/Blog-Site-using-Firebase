@@ -1,8 +1,8 @@
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeaderImg from './HeaderImg';
 import FeaturedArticles from './Articles';
-// import FeaturedTutorials from "./Tutorials";
+import FeaturedTutorials from './Tutorials';
 import SubscribeForm from './subsEmail';
 import Footer from './Footer';
 
@@ -47,12 +47,8 @@ const HomePage = () => {
             margin: '20px',
           }}
         >
-          <Typography variant="h4" component="div" sx={{ alignSelf: 'center' }}>
-            FEATURED ARTICLES ARE DISABLED DUE TO UNNCESSARY API USAGE
-          </Typography>
+          <FeaturedTutorials />
         </motion.section>
-
-        {/* <FeaturedTutorials /> */}
 
         <motion.div
           key={'subscribe'}
