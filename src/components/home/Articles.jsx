@@ -17,6 +17,30 @@ import { useNavigate } from 'react-router-dom';
 import fetchUserDisplayName from '../../utils/fetchUserDisplayName'; // Import the utility function
 import useThemeContext from '../../hooks/useTheme';
 
+/**
+ * FeaturedArticles component fetches and displays a list of articles from a Firestore collection.
+ * It shows a loading spinner while fetching data and displays a limited number of articles initially,
+ * with an option to show all articles.
+ *
+ * @component
+ * @example
+ * return (
+ *   <FeaturedArticles />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name FeaturedArticles
+ *
+ * @description
+ * - Uses `useState` to manage articles, showAll, and loading states.
+ * - Uses `useEffect` to fetch articles from Firestore on component mount.
+ * - Uses `useNavigate` for navigation.
+ * - Uses `useThemeContext` to get the current theme.
+ * - Displays a loading spinner while fetching articles.
+ * - Displays a list of articles with a "See All Articles" button to toggle between showing all articles or a limited number.
+ */
 export default function FeaturedArticles() {
   const [articles, setArticles] = useState([]);
   const [showAll, setShowAll] = useState(false);

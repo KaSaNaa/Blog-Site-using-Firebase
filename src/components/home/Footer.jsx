@@ -1,6 +1,19 @@
 import { Container, Typography, Box, Link, IconButton } from '@mui/material';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
 
+/**
+ * Footer component that displays the footer section of the website.
+ * 
+ * The footer includes:
+ * - A title "Dev at Deakin"
+ * - A subtitle "Empowering developers to innovate and create."
+ * - Contact information including email, phone number, and a contact form link
+ * - Social media icons linking to Facebook, Twitter, Instagram, and LinkedIn
+ * - Copyright information with the current year
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered footer component
+ */
 export default function Footer() {
   return (
     <Box

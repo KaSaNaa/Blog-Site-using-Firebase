@@ -16,6 +16,41 @@ import useAuth from '../../services/authentication'; // Adjust the path to your 
 import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
+/**
+ * SignUp component allows users to create a new account using email and password,
+ * or sign up using their GitHub or Google accounts.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SignUp />
+ * )
+ *
+ * @returns {JSX.Element} The rendered SignUp component.
+ *
+ * @description
+ * This component renders a sign-up form with fields for email and password.
+ * It also provides options to sign up using GitHub or Google accounts.
+ * If the user is already authenticated, it redirects to the home page.
+ *
+ * @requires useAuth - Custom hook to handle authentication logic.
+ * @requires AuthContext - Context to access the current authenticated user.
+ * @requires useState - React hook to manage component state.
+ * @requires useContext - React hook to access context values.
+ * @requires Navigate - Component from react-router-dom to handle navigation.
+ * @requires Container - Material-UI component for layout.
+ * @requires Box - Material-UI component for layout.
+ * @requires Typography - Material-UI component for text.
+ * @requires Divider - Material-UI component for dividing content.
+ * @requires Grid - Material-UI component for grid layout.
+ * @requires TextField - Material-UI component for input fields.
+ * @requires Button - Material-UI component for buttons.
+ * @requires EmailIcon - Material-UI icon for email input.
+ * @requires LockIcon - Material-UI icon for password input.
+ * @requires GitHubIcon - Material-UI icon for GitHub sign-up button.
+ * @requires GoogleIcon - Material-UI icon for Google sign-up button.
+ * @requires Link - Component from react-router-dom for navigation links.
+ */
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -3,6 +3,14 @@ import { db } from '../configs/firebaseConfigs';
 import { doc, getDoc } from 'firebase/firestore';
 import fetchUserDisplayName from '../utils/fetchUserDisplayName'; // Import the utility function
 
+/**
+ * Custom hook to fetch and manage an article by its ID.
+ *
+ * @param {string} articleId - The ID of the article to fetch.
+ * @returns {Object} - An object containing the article data and a function to refetch the article.
+ * @returns {Object|null} article - The fetched article data, or null if not yet fetched.
+ * @returns {Function} fetchArticle - Function to refetch the article data.
+ */
 const useArticle = (articleId) => {
   const [article, setArticle] = useState(null);
 

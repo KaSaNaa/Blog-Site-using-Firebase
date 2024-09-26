@@ -8,6 +8,36 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
+/**
+ * SubscribeForm component renders a subscription form for users to subscribe to a newsletter.
+ * It includes an email input field and a submit button.
+ * 
+ * @component
+ * 
+ * @example
+ * return (
+ *   <SubscribeForm />
+ * )
+ * 
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @function
+ * @name SubscribeForm
+ * 
+ * @description
+ * This component maintains an internal state for the email input field.
+ * On form submission, it sends a POST request to the server to send a welcome email.
+ * 
+ * @async
+ * @function handleSubmit
+ * @param {Object} event - The form submission event.
+ * @returns {Promise<void>} A promise that resolves when the email is sent.
+ * 
+ * @example
+ * handleSubmit(event);
+ * 
+ * @throws Will alert an error message if the email sending fails.
+ */
 export default function SubscribeForm() {
   const [email, setEmail] = useState('');
 

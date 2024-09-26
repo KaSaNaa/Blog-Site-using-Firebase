@@ -10,6 +10,25 @@ import {
 
 export const ThemeContext = createContext(); // Export ThemeContext
 
+/**
+ * ThemeProvider component that provides theme context to its children.
+ *
+ * @param {Object} props - The properties object.
+ * @param {React.ReactNode} props.children - The child components that will have access to the theme context.
+ * @returns {JSX.Element} The ThemeContext provider with the current theme and changeTheme function.
+ *
+ * @example
+ * <ThemeProvider>
+ *   <App />
+ * </ThemeProvider>
+ *
+ * @typedef {Object} Theme
+ * @property {string} name - The name of the theme.
+ *
+ * @typedef {Object} ThemeContextValue
+ * @property {Theme} theme - The current theme object.
+ * @property {function(string): void} changeTheme - Function to change the theme.
+ */
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState({ ...darkTheme, name: 'dark' }); // Ensure theme has a name property
 

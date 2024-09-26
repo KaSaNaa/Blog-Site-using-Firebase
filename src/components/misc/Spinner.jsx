@@ -30,6 +30,14 @@ ProgressSpinner.propTypes = {
   text: PropTypes.string,
 };
 
+/**
+ * Spinner component that displays a loading spinner with optional text.
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} [props.color='#4fa94d'] - The color of the spinner.
+ * @param {string} [props.text='Loading...'] - The text to display below the spinner.
+ * @returns {JSX.Element} The rendered Spinner component.
+ */
 const Spinner = ({ color = '#4fa94d', text = 'Loading...' }) => {
   return (
     <div

@@ -17,6 +17,38 @@ import ArticlePost from './ArticlePost';
 import QuestionPost from './QuestionPost';
 import Spinner from '../misc/Spinner';
 
+/**
+ * PostPage component handles the creation and submission of posts.
+ * It allows users to select between posting a question or an article.
+ * 
+ * @component
+ * 
+ * @example
+ * return (
+ *   <PostPage />
+ * )
+ * 
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @description
+ * - Uses `useState` to manage local state for post type, loading status, and snackbar notifications.
+ * - Uses `useNavigate` from `react-router-dom` for navigation.
+ * - Uses `useContext` to access the authenticated user from `AuthContext`.
+ * - Contains `handlePostSubmit` function to handle post submission, including validation, image upload, and post creation.
+ * - Displays a loading spinner and snackbar notifications based on the state.
+ * - Renders `PostTypeSelector`, `QuestionPost`, and `ArticlePost` components based on the selected post type.
+ * 
+ * @function handlePostSubmit
+ * @param {Object} postData - The data of the post to be submitted.
+ * @param {string} postData.title - The title of the post.
+ * @param {string} postData.description - The description of the post.
+ * @param {Array<string>} postData.tags - The tags associated with the post.
+ * @param {File} [postData.image] - The image file to be uploaded with the post.
+ * 
+ * @returns {Promise<void>} A promise that resolves when the post is successfully submitted.
+ * 
+ * @throws Will throw an error if the user is not authenticated or if there is an error during post submission.
+ */
 const PostPage = () => {
   const [postType, setPostType] = useState('question');
   const [loading, setLoading] = useState(false);
@@ -30,7 +62,6 @@ const PostPage = () => {
     navigate('/find-questions');
   };
 
-  // eslint-disable-next-line no-unused-vars
   const navShowArticles = () => {
     navigate('/show-articles');
   };

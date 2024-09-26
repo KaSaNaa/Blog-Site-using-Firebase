@@ -10,6 +10,42 @@ import ArticleContent from './ArticleView/ArticleContent';
 import ArticleComments from './ArticleView/ArticleComments';
 import CommentForm from './ArticleView/CommentForm';
 
+/**
+ * ArticleView component fetches and displays an article along with its comments and like functionality.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @example
+ * return (
+ *   <ArticleView />
+ * )
+ * 
+ * @description
+ * This component uses the `useParams` hook to get the article ID from the URL, and the `useArticle` custom hook to fetch the article data.
+ * It also allows users to add comments and like the article. The component uses the `AuthContext` to get the current user information.
+ * 
+ * @function handleAddComment
+ * Adds a new comment to the article. It checks if the comment is not empty, creates a new comment object, updates the Firestore document, and refreshes the article view.
+ * 
+ * @function handleLike
+ * Adds a like to the article. It checks if the user has already liked the article, updates the Firestore document, and refreshes the article view.
+ * 
+ * @requires useParams
+ * @requires useArticle
+ * @requires useState
+ * @requires useContext
+ * @requires AuthContext
+ * @requires Spinner
+ * @requires Box
+ * @requires ArticleContent
+ * @requires ArticleComments
+ * @requires CommentForm
+ * @requires doc
+ * @requires updateDoc
+ * @requires arrayUnion
+ * @requires increment
+ */
 const ArticleView = () => {
   const { articleId } = useParams();
   const { article, fetchArticle } = useArticle(articleId);

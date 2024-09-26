@@ -6,6 +6,21 @@ import FeaturedTutorials from './Tutorials';
 import SubscribeForm from './subsEmail';
 import Footer from './Footer';
 
+/**
+ * HomePage component renders the main content of the home page with animations.
+ * It includes the following sections:
+ * - Header image
+ * - Featured articles
+ * - Featured tutorials
+ * - Subscribe form
+ * - Footer
+ *
+ * Each section is wrapped in a motion.div or motion.section for animation effects
+ * using the AnimatePresence component from Framer Motion.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered HomePage component.
+ */
 const HomePage = () => {
   return (
     <Box

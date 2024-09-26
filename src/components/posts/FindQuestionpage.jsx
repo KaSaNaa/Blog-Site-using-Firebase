@@ -16,6 +16,45 @@ import Spinner from '../misc/Spinner';
 import QuestionView from './QuestionView';
 import fetchUserDisplayName from '../../utils/fetchUserDisplayName';
 
+/**
+ * FindQuestionPage component fetches and displays a list of questions from a database.
+ * It allows users to filter questions by title, tags, or date.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <FindQuestionPage />
+ * )
+ * 
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @function
+ * @name FindQuestionPage
+ * 
+ * @description
+ * - Uses `useState` to manage questions, filter, filterType, and loading state.
+ * - Uses `useEffect` to fetch questions from the database on component mount.
+ * - Filters questions based on the selected filter type and filter value.
+ * - Navigates to the post creation page when the "Post something" button is clicked.
+ * 
+ * @requires useState
+ * @requires useEffect
+ * @requires useNavigate
+ * @requires getDocs
+ * @requires collection
+ * @requires db
+ * @requires fetchUserDisplayName
+ * @requires Container
+ * @requires Spinner
+ * @requires Box
+ * @requires Button
+ * @requires FormControl
+ * @requires InputLabel
+ * @requires Select
+ * @requires MenuItem
+ * @requires TextField
+ * @requires QuestionView
+ */
 const FindQuestionPage = () => {
   const [questions, setQuestions] = useState([]);
   const [filter, setFilter] = useState('');

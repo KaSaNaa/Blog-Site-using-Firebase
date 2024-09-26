@@ -1,3 +1,33 @@
+/**
+ * SignIn component renders a sign-in form with options for signing in using email/password,
+ * Google, or GitHub. If the user is already signed in, it displays a message and redirects to the home page.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SignIn />
+ * )
+ *
+ * @returns {JSX.Element} The rendered SignIn component.
+ *
+ * @requires useContext
+ * @requires useState
+ * @requires @mui/material.Typography
+ * @requires @mui/material.TextField
+ * @requires @mui/material.Button
+ * @requires @mui/material.Box
+ * @requires @mui/material.Container
+ * @requires @mui/material.Grid
+ * @requires @mui/material.Divider
+ * @requires @mui/icons-material.Google
+ * @requires @mui/icons-material.GitHub
+ * @requires @mui/icons-material.Email
+ * @requires @mui/icons-material.Lock
+ * @requires ../../services/authentication
+ * @requires react-router-dom.Link
+ * @requires react-router-dom.Navigate
+ * @requires ../../contexts/AuthContext
+ */
 import { useContext, useState } from 'react';
 import {
   Typography,
