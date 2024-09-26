@@ -15,12 +15,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import { ProgressSpinner as Spinner } from '../misc/Spinner';
 import { useNavigate } from 'react-router-dom';
 import fetchUserDisplayName from '../../utils/fetchUserDisplayName'; // Import the utility function
+import useThemeContext from '../../hooks/useTheme';
 
 export default function FeaturedArticles() {
   const [articles, setArticles] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate(); // Initialize useNavigate
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -63,7 +65,18 @@ export default function FeaturedArticles() {
       <Grid container spacing={0}>
         {displayedArticles.map((article) => (
           <Grid item xs={12} sm={6} md={4} key={article.id}>
-            <Card sx={{ margin: '70px' }}>
+            <Card
+              sx={{
+                margin: '70px',
+                borderRadius: '20px', // Default rounded corners
+                transition:
+                  'transform 0.3s, box-shadow 0.3s, border-radius 0.3s',
+                '&:hover': {
+                  transform: 'scale(1.02)',
+                  boxShadow: `5px 5px 20px ${theme.palette.primary.main}`, 
+                },
+              }}
+            >
               <CardActionArea
                 onClick={() => navigate(`/article/${article.id}`)}
               >
