@@ -1,4 +1,5 @@
 import { Typography, Box } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
 import NavBar from "./NavBar";
 import HeaderImg from "./HeaderImg";
 import FeaturedArticles from "./Articles";
@@ -13,27 +14,77 @@ const HomePage = () => {
         minHeight: "100vh",
       }}
     >
-      <NavBar />
-      <HeaderImg />
-      <FeaturedArticles />
-      {/* TODO: remove the commented code below */}
-      <section
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "20px",
-        }}
-      >
-        {/* Spacer */}
-        <Typography variant="h4" component="div" sx={{ alignSelf: "center" }}>
-          FEATURED ARTICLES ARE DISABLED DUE TO UNNCESSARY API USAGE
-        </Typography>
-      </section>
+      <AnimatePresence>
+        <motion.div
+        key={'navbar'}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <NavBar />
+        </motion.div>
 
-      {/* <FeaturedTutorials /> */}
-      <SubscribeForm />
-      <Footer />
+        <motion.div
+        key={'header'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <HeaderImg />
+        </motion.div>
+
+        <motion.div
+        key={'articles'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 1 }}
+        >
+          <FeaturedArticles />
+        </motion.div>
+
+        <motion.section
+        key={'featured'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 1.5 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "20px",
+          }}
+        >
+          <Typography variant="h4" component="div" sx={{ alignSelf: "center" }}>
+            FEATURED ARTICLES ARE DISABLED DUE TO UNNCESSARY API USAGE
+          </Typography>
+        </motion.section>
+
+        {/* <FeaturedTutorials /> */}
+
+        <motion.div
+        key={'subscribe'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 2 }}
+        >
+          <SubscribeForm />
+        </motion.div>
+
+        <motion.div
+        key={'footer'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 2.5 }}
+        >
+          <Footer />
+        </motion.div>
+      </AnimatePresence>
     </Box>
   );
 };
