@@ -1,10 +1,10 @@
-import { Oval } from "react-loader-spinner";
-import { Typography } from "@mui/material";
-import PropTypes from "prop-types";
+import { Oval } from 'react-loader-spinner';
+import { Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-export const ProgressSpinner = ({text = "Loading..."}) => {
+export const ProgressSpinner = ({ text = 'Loading...' }) => {
   return (
     <Box
       sx={{
@@ -14,10 +14,10 @@ export const ProgressSpinner = ({text = "Loading..."}) => {
         height: '100vh',
       }}
     >
-    <Typography
+      <Typography
         variant="h6"
         color="textSecondary"
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: '20px' }}
       >
         {text}
       </Typography>
@@ -30,21 +30,21 @@ ProgressSpinner.propTypes = {
   text: PropTypes.string,
 };
 
-const Spinner = ({ color = "#4fa94d", text = "Loading..." }) => {
+const Spinner = ({ color = '#4fa94d', text = 'Loading...' }) => {
   return (
     <div
       style={{
-        position: "fixed",
+        position: 'fixed',
         top: 0,
         left: 0,
-        width: "100%",
-        height: "100%",
-        backgroundColor: "rgba(255, 255, 255, 0.01)",
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(255, 255, 255, 0.01)',
         zIndex: 9999,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Oval
@@ -60,7 +60,7 @@ const Spinner = ({ color = "#4fa94d", text = "Loading..." }) => {
       <Typography
         variant="h6"
         color="textSecondary"
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: '20px' }}
       >
         {text}
       </Typography>

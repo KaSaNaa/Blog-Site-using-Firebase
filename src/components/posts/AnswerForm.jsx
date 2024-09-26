@@ -1,14 +1,14 @@
-import { useContext, useState, useEffect } from "react";
-import { db } from "../../configs/firebaseConfigs";
-import { addDoc, collection } from "firebase/firestore";
-import { AuthContext } from "../../contexts/AuthContext.jsx";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import PropTypes from "prop-types";
-import fetchUserDisplayName from "../../utils/fetchUserDisplayName.js";
+import { useContext, useState, useEffect } from 'react';
+import { db } from '../../configs/firebaseConfigs';
+import { addDoc, collection } from 'firebase/firestore';
+import { AuthContext } from '../../contexts/AuthContext.jsx';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+import fetchUserDisplayName from '../../utils/fetchUserDisplayName.js';
 
 const AnswerForm = ({ questionId, onAnswerSubmit }) => {
-  const [answer, setAnswer] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [answer, setAnswer] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const AnswerForm = ({ questionId, onAnswerSubmit }) => {
         const displayName = await fetchUserDisplayName(user.uid); // Use the utility function
         setDisplayName(displayName);
       } catch (error) {
-        console.error("Error fetching user display name:", error);
+        console.error('Error fetching user display name:', error);
       }
     };
 
@@ -38,13 +38,13 @@ const AnswerForm = ({ questionId, onAnswerSubmit }) => {
         displayName, // Store the display name
         date: new Date(),
       };
-      const docRef = await addDoc(collection(db, "answers"), newAnswer);
-      setAnswer("");
+      const docRef = await addDoc(collection(db, 'answers'), newAnswer);
+      setAnswer('');
       if (onAnswerSubmit) {
         onAnswerSubmit({ id: docRef.id, ...newAnswer });
       }
     } catch (error) {
-      console.error("Error adding answer:", error);
+      console.error('Error adding answer:', error);
     }
   };
 

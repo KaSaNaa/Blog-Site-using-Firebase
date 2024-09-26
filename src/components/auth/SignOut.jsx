@@ -1,25 +1,30 @@
-import { auth } from "../../configs/firebaseConfigs";
-import { signOut } from "firebase/auth";
-import { Button, Box, Typography } from "@mui/material";
+import { auth } from '../../configs/firebaseConfigs';
+import { signOut } from 'firebase/auth';
+import { Button, Box, Typography } from '@mui/material';
 
 const SignOut = () => {
   const handleSignOut = async () => {
-    const confirmed = window.confirm("Are you sure you want to sign out?");
+    const confirmed = window.confirm('Are you sure you want to sign out?');
     if (!confirmed) {
       return;
     }
     try {
       await signOut(auth);
-      alert("Signed out successfully");
+      alert('Signed out successfully');
     } catch (error) {
-      console.error("Error signing out:", error);
-      alert("Error signing out");
+      console.error('Error signing out:', error);
+      alert('Error signing out');
     }
   };
   return (
     <Box>
       <Typography variant="h4">Sign Out</Typography>
-      <Button variant="contained" color="secondary" fullWidth onClick={handleSignOut}>
+      <Button
+        variant="contained"
+        color="secondary"
+        fullWidth
+        onClick={handleSignOut}
+      >
         Sign Out
       </Button>
     </Box>

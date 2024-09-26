@@ -1,34 +1,34 @@
-import { Button, Box, TextField, Snackbar, Alert } from "@mui/material";
-import { useState } from "react";
+import { Button, Box, TextField, Snackbar, Alert } from '@mui/material';
+import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
 const QuestionPost = ({ onSubmit }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
   const handleSubmit = async () => {
     try {
       if (!title || !description || !tags) {
-        setSnackbarMessage("All fields are required.");
-        setSnackbarSeverity("error");
+        setSnackbarMessage('All fields are required.');
+        setSnackbarSeverity('error');
         setSnackbarOpen(true);
         return;
       }
 
       await onSubmit({ title, description, tags });
-      setTitle("");
-      setDescription("");
-      setTags("");
-      setSnackbarMessage("Question posted successfully!");
-      setSnackbarSeverity("success");
+      setTitle('');
+      setDescription('');
+      setTags('');
+      setSnackbarMessage('Question posted successfully!');
+      setSnackbarSeverity('success');
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      setSnackbarMessage("Error posting question.");
-      setSnackbarSeverity("error");
+      setSnackbarMessage('Error posting question.');
+      setSnackbarSeverity('error');
     } finally {
       setSnackbarOpen(true);
     }

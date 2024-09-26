@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Box, Typography, Divider, Paper } from "@mui/material";
+import { Box, Typography, Divider, Paper } from '@mui/material';
 
 const ArticleComments = ({ comments }) => {
   return (
@@ -11,7 +11,7 @@ const ArticleComments = ({ comments }) => {
         <Box key={index} sx={{ marginBottom: 2 }}>
           <Typography variant="body1">{comment.comment}</Typography>
           <Typography variant="body2" color="textSecondary">
-            Posted by: {comment.displayName} on{" "}
+            Posted by: {comment.displayName} on{' '}
             {new Date(comment.date.seconds * 1000).toLocaleDateString()}
           </Typography>
           <Divider sx={{ marginY: 1 }} />

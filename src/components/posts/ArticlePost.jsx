@@ -6,47 +6,47 @@ import {
   Alert,
   Typography,
   Grid,
-} from "@mui/material";
-import ImageIcon from "@mui/icons-material/Image"; // Import ImageIcon from Material-UI
-import { useState } from "react";
+} from '@mui/material';
+import ImageIcon from '@mui/icons-material/Image'; // Import ImageIcon from Material-UI
+import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
 const ArticlePost = ({ onSubmit }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState(""); // Changed from abstract to description
-  const [content, setContent] = useState(""); // Changed from articleText to content
-  const [tags, setTags] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState(''); // Changed from abstract to description
+  const [content, setContent] = useState(''); // Changed from articleText to content
+  const [tags, setTags] = useState('');
   const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState("");
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(""); // New state for image preview URL
+  const [imageName, setImageName] = useState('');
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(''); // New state for image preview URL
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
   const handleSubmit = async () => {
     try {
       if (!title || !description || !content || !tags) {
-        setSnackbarMessage("All fields are required.");
-        setSnackbarSeverity("error");
+        setSnackbarMessage('All fields are required.');
+        setSnackbarSeverity('error');
         setSnackbarOpen(true);
         return;
       }
 
       await onSubmit({ title, description, content, tags, image });
-      setTitle("");
-      setDescription("");
-      setContent("");
-      setTags("");
+      setTitle('');
+      setDescription('');
+      setContent('');
+      setTags('');
       setImage(null);
-      setImageName("");
-      setImagePreviewUrl(""); // Reset image preview URL
-      setSnackbarMessage("Article posted successfully!");
-      setSnackbarSeverity("success");
+      setImageName('');
+      setImagePreviewUrl(''); // Reset image preview URL
+      setSnackbarMessage('Article posted successfully!');
+      setSnackbarSeverity('success');
       console.log(title, description, content, tags, image);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      setSnackbarMessage("Error posting article.");
-      setSnackbarSeverity("error");
+      setSnackbarMessage('Error posting article.');
+      setSnackbarSeverity('error');
     } finally {
       setSnackbarOpen(true);
     }
@@ -55,8 +55,8 @@ const ArticlePost = ({ onSubmit }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    setImageName(file ? file.name : "");
-    setImagePreviewUrl(file ? URL.createObjectURL(file) : ""); // Generate image preview URL
+    setImageName(file ? file.name : '');
+    setImagePreviewUrl(file ? URL.createObjectURL(file) : ''); // Generate image preview URL
   };
 
   const handleCloseSnackbar = () => {
@@ -109,7 +109,7 @@ const ArticlePost = ({ onSubmit }) => {
         <Grid item xs={6} display="flex" alignItems="center">
           <input
             type="file"
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             id="upload-button"
             onChange={handleFileChange}
             accept="image/*"
@@ -129,10 +129,10 @@ const ArticlePost = ({ onSubmit }) => {
             sx={{
               width: 100,
               height: 100,
-              border: "1px solid #ccc",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              border: '1px solid #ccc',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               marginLeft: 2,
             }}
           >
@@ -140,10 +140,10 @@ const ArticlePost = ({ onSubmit }) => {
               <img
                 src={imagePreviewUrl}
                 alt="Image preview"
-                style={{ maxWidth: "100%", maxHeight: "100%" }}
+                style={{ maxWidth: '100%', maxHeight: '100%' }}
               />
             ) : (
-              <ImageIcon style={{ fontSize: 50, color: "#ccc", }} />
+              <ImageIcon style={{ fontSize: 50, color: '#ccc' }} />
             )}
           </Box>
         </Grid>

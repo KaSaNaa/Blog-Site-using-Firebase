@@ -1,32 +1,21 @@
-import { Typography, Box } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
-import NavBar from "./NavBar";
-import HeaderImg from "./HeaderImg";
-import FeaturedArticles from "./Articles";
+import { Typography, Box } from '@mui/material';
+import { motion, AnimatePresence } from 'framer-motion';
+import HeaderImg from './HeaderImg';
+import FeaturedArticles from './Articles';
 // import FeaturedTutorials from "./Tutorials";
-import SubscribeForm from "./subsEmail";
-import Footer from "./Footer";
+import SubscribeForm from './subsEmail';
+import Footer from './Footer';
 
 const HomePage = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: '100vh',
       }}
     >
       <AnimatePresence>
         <motion.div
-        key={'navbar'}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}
-          transition={{ duration: 0.5 }}
-        >
-          <NavBar />
-        </motion.div>
-
-        <motion.div
-        key={'header'}
+          key={'header'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -36,7 +25,7 @@ const HomePage = () => {
         </motion.div>
 
         <motion.div
-        key={'articles'}
+          key={'articles'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -46,19 +35,19 @@ const HomePage = () => {
         </motion.div>
 
         <motion.section
-        key={'featured'}
+          key={'featured'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, delay: 1.5 }}
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "20px",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '20px',
           }}
         >
-          <Typography variant="h4" component="div" sx={{ alignSelf: "center" }}>
+          <Typography variant="h4" component="div" sx={{ alignSelf: 'center' }}>
             FEATURED ARTICLES ARE DISABLED DUE TO UNNCESSARY API USAGE
           </Typography>
         </motion.section>
@@ -66,7 +55,7 @@ const HomePage = () => {
         {/* <FeaturedTutorials /> */}
 
         <motion.div
-        key={'subscribe'}
+          key={'subscribe'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -76,7 +65,7 @@ const HomePage = () => {
         </motion.div>
 
         <motion.div
-        key={'footer'}
+          key={'footer'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionSummary,
@@ -7,24 +7,24 @@ import {
   CardContent,
   Typography,
   Box,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AnswerForm from "./AnswerForm";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../configs/firebaseConfigs";
-import fetchUserDisplayName from "../../utils/fetchUserDisplayName"; // Import the utility function
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AnswerForm from './AnswerForm';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../configs/firebaseConfigs';
+import fetchUserDisplayName from '../../utils/fetchUserDisplayName'; // Import the utility function
 
 const QuestionView = ({ question }) => {
   const [answers, setAnswers] = useState([]);
   const [showAnswers, setShowAnswers] = useState(false);
-  const [questionDisplayName, setQuestionDisplayName] = useState("");
+  const [questionDisplayName, setQuestionDisplayName] = useState('');
 
   useEffect(() => {
     const fetchAnswers = async () => {
       if (showAnswers) {
         const q = query(
-          collection(db, "answers"),
-          where("questionId", "==", question.id)
+          collection(db, 'answers'),
+          where('questionId', '==', question.id)
         );
         const querySnapshot = await getDocs(q);
         const answersData = await Promise.all(
@@ -60,24 +60,26 @@ const QuestionView = ({ question }) => {
         <CardContent>
           <Typography gutterBottom>{question.description}</Typography>
           <Typography variant="body2" color="textSecondary">
-            Posted by: {questionDisplayName} on{" "}
+            Posted by: {questionDisplayName} on{' '}
             {question.date && question.date.seconds
               ? new Date(question.date.seconds * 1000).toLocaleDateString()
-              : "Unknown Date"}
+              : 'Unknown Date'}
           </Typography>
           {showAnswers && (
             <Box mt={2}>
               <Typography variant="h6">Answers</Typography>
               {answers.map((answer) => (
                 <Box key={answer.id} mt={2}>
-                  <Typography sx={{ gutterBottom:true }}>{answer.answer}</Typography>
+                  <Typography sx={{ gutterBottom: true }}>
+                    {answer.answer}
+                  </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Posted by: {answer.displayName} on{" "}
+                    Posted by: {answer.displayName} on{' '}
                     {answer.date && answer.date.seconds
                       ? new Date(
                           answer.date.seconds * 1000
                         ).toLocaleDateString()
-                      : "Unknown Date"}
+                      : 'Unknown Date'}
                   </Typography>
                 </Box>
               ))}

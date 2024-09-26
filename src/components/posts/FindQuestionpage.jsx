@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -8,29 +8,29 @@ import {
   FormControl,
   InputLabel,
   Box,
-} from "@mui/material";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../configs/firebaseConfigs";
-import { useNavigate } from "react-router-dom";
-import Spinner from "../misc/Spinner";
-import QuestionView from "./QuestionView";
-import fetchUserDisplayName from "../../utils/fetchUserDisplayName";
+} from '@mui/material';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../configs/firebaseConfigs';
+import { useNavigate } from 'react-router-dom';
+import Spinner from '../misc/Spinner';
+import QuestionView from './QuestionView';
+import fetchUserDisplayName from '../../utils/fetchUserDisplayName';
 
 const FindQuestionPage = () => {
   const [questions, setQuestions] = useState([]);
-  const [filter, setFilter] = useState("");
-  const [filterType, setFilterType] = useState("title");
+  const [filter, setFilter] = useState('');
+  const [filterType, setFilterType] = useState('title');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/post-something");
+    navigate('/post-something');
   };
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "questions"));
+        const querySnapshot = await getDocs(collection(db, 'questions'));
         const questionsWithUserDetails = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
@@ -40,7 +40,7 @@ const FindQuestionPage = () => {
         );
         setQuestions(questionsWithUserDetails);
       } catch (error) {
-        console.error("Error fetching questions: ", error);
+        console.error('Error fetching questions: ', error);
       } finally {
         setLoading(false);
       }
@@ -50,11 +50,11 @@ const FindQuestionPage = () => {
   }, []);
 
   const filteredQuestions = questions.filter((question) => {
-    if (filterType === "title") {
+    if (filterType === 'title') {
       return question.title.toLowerCase().includes(filter.toLowerCase());
-    } else if (filterType === "tags") {
+    } else if (filterType === 'tags') {
       return question.tags.toLowerCase().includes(filter.toLowerCase());
-    } else if (filterType === "date") {
+    } else if (filterType === 'date') {
       return new Date(question.date.seconds * 1000)
         .toLocaleDateString()
         .includes(filter);
@@ -65,7 +65,7 @@ const FindQuestionPage = () => {
   return (
     <Container>
       {loading && <Spinner color="#4fa94d" text="Loading Questions..." />}
-      <div style={{ filter: loading ? "blur(5px)" : "none" }}>
+      <div style={{ filter: loading ? 'blur(5px)' : 'none' }}>
         <Box my={2}>
           <Button variant="contained" onClick={handleNavigate}>
             Post something

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 import {
   Typography,
   TextField,
@@ -7,28 +7,30 @@ import {
   Container,
   Grid,
   Divider,
-} from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import EmailIcon from "@mui/icons-material/Email";
-import LockIcon from "@mui/icons-material/Lock";
-import useAuth from "../../services/authentication";
-import { Link, Navigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+} from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
+import useAuth from '../../services/authentication';
+import { Link, Navigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const { user } = useContext(AuthContext);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const { handleGoogleSignIn, handleGithubSignIn, handleEmailSignIn } =
     useAuth();
 
   if (user) {
-    return <>
-      {/* show an alert saying user is already signed in */}
-      <Typography>User is already signed in</Typography>
-      <Navigate to="/" />
-    </>
+    return (
+      <>
+        {/* show an alert saying user is already signed in */}
+        <Typography>User is already signed in</Typography>
+        <Navigate to="/" />
+      </>
+    );
   }
 
   const handleSubmit = (e) => {
@@ -38,12 +40,8 @@ const SignIn = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ textAlign: "center", mt: 4 }}>
-        <Typography
-          variant="h4"
-          gutterBottom
-          sx={{ fontWeight: "bold" }}
-        >
+      <Box sx={{ textAlign: 'center', mt: 4 }}>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
           Sign In
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
@@ -85,12 +83,12 @@ const SignIn = () => {
               >
                 Sign in
               </Button>
-              <Box sx={{ textAlign: "center", mt: 4 }}>
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                >Don&apos;t have an account?&nbsp;
-                  <Link to="/signup"><Typography>Sign up here</Typography></Link>
+              <Box sx={{ textAlign: 'center', mt: 4 }}>
+                <Typography variant="subtitle1" gutterBottom>
+                  Don&apos;t have an account?&nbsp;
+                  <Link to="/signup">
+                    <Typography>Sign up here</Typography>
+                  </Link>
                 </Typography>
               </Box>
             </Grid>
@@ -107,7 +105,7 @@ const SignIn = () => {
               startIcon={<GoogleIcon />}
               onClick={handleGoogleSignIn}
               sx={{
-                "&:hover": { backgroundColor: "#357ae8" },
+                '&:hover': { backgroundColor: '#357ae8' },
               }}
             >
               Sign in with Google
@@ -120,9 +118,9 @@ const SignIn = () => {
               startIcon={<GitHubIcon />}
               onClick={handleGithubSignIn}
               sx={{
-                backgroundColor: "#333",
-                color: "#fff",
-                "&:hover": { backgroundColor: "#24292e" },
+                backgroundColor: '#333',
+                color: '#fff',
+                '&:hover': { backgroundColor: '#24292e' },
               }}
             >
               Sign in with GitHub

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button } from '@mui/material';
 
 const CommentForm = ({ comment, setComment, handleAddComment }) => {
   return (

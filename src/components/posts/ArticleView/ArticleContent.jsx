@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { Box, Typography, Paper, IconButton } from "@mui/material";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Box, Typography, Paper, IconButton } from '@mui/material';
 
 const ArticleContent = ({ article, handleLike }) => {
   return (
@@ -17,22 +17,34 @@ const ArticleContent = ({ article, handleLike }) => {
         src={article.image}
         alt={article.title}
         sx={{
-          width: "100%",
-          height: "auto",
+          width: '100%',
+          height: 'auto',
           borderRadius: 2,
           marginBottom: 2,
         }}
       />
-      <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 2 }}>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        sx={{ marginBottom: 2 }}
+      >
         {article.description}
       </Typography>
-      <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 2 }}>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        sx={{ marginBottom: 2 }}
+      >
         Tags: {article.tags}
       </Typography>
-      <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 2 }}>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        sx={{ marginBottom: 2 }}
+      >
         Posted on: {new Date(article.date.seconds * 1000).toLocaleDateString()}
       </Typography>
-      <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
         <IconButton onClick={handleLike}>
           <ThumbUpIcon />
         </IconButton>

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -12,20 +12,20 @@ import {
   Select,
   FormControl,
   InputLabel,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import { signOut } from "firebase/auth";
-import { auth } from "../../configs/firebaseConfigs";
-import { useThemeContext } from "../../contexts/ThemeContext"; // Correct import
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../configs/firebaseConfigs';
+import { useThemeContext } from '../../contexts/ThemeContext'; // Correct import
 
 function NavBar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
   const { theme, changeTheme } = useThemeContext(); // Use ThemeContext
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedTheme, setSelectedTheme] = useState(theme.name || "dark");
+  const [selectedTheme, setSelectedTheme] = useState(theme.name || 'dark');
 
   useEffect(() => {
     setSelectedTheme(theme.name); // Synchronize initial theme state
@@ -40,22 +40,22 @@ function NavBar() {
   };
 
   const handleLoginClick = () => {
-    navigate("/signin");
+    navigate('/signin');
   };
 
   const handleSignOut = async () => {
-    const confirmed = window.confirm("Are you sure you want to sign out?");
+    const confirmed = window.confirm('Are you sure you want to sign out?');
     if (!confirmed) {
       return;
     }
     try {
       await signOut(auth);
       setUser(null);
-      alert("Signed out successfully");
-      navigate("/");
+      alert('Signed out successfully');
+      navigate('/');
     } catch (error) {
-      console.error("Error signing out:", error);
-      alert("Error signing out");
+      console.error('Error signing out:', error);
+      alert('Error signing out');
     }
   };
 
@@ -83,9 +83,9 @@ function NavBar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
               Dev@Deakin
             </Link>
           </Typography>
@@ -139,7 +139,7 @@ function NavBar() {
       >
         <MenuItem
           onClick={() => {
-            navigate("/find-questions");
+            navigate('/find-questions');
             handleMenuClose();
           }}
         >
@@ -147,7 +147,7 @@ function NavBar() {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            navigate("/post-something");
+            navigate('/post-something');
             handleMenuClose();
           }}
         >

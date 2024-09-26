@@ -1,10 +1,20 @@
-import { useState, useEffect } from "react";
-import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, Button, Box, Divider } from "@mui/material";
-import { db } from "../../configs/firebaseConfigs";
-import { collection, getDocs } from "firebase/firestore";
-import { ProgressSpinner as Spinner } from "../misc/Spinner";
-import { useNavigate } from "react-router-dom";
-import fetchUserDisplayName from "../../utils/fetchUserDisplayName"; // Import the utility function
+import { useState, useEffect } from 'react';
+import {
+  Grid,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  Divider,
+} from '@mui/material';
+import { db } from '../../configs/firebaseConfigs';
+import { collection, getDocs } from 'firebase/firestore';
+import { ProgressSpinner as Spinner } from '../misc/Spinner';
+import { useNavigate } from 'react-router-dom';
+import fetchUserDisplayName from '../../utils/fetchUserDisplayName'; // Import the utility function
 
 export default function FeaturedArticles() {
   const [articles, setArticles] = useState([]);
@@ -15,7 +25,7 @@ export default function FeaturedArticles() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "articles"));
+        const querySnapshot = await getDocs(collection(db, 'articles'));
         const articlesData = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
@@ -25,7 +35,7 @@ export default function FeaturedArticles() {
         );
         setArticles(articlesData);
       } catch (error) {
-        console.error("Error fetching articles: ", error);
+        console.error('Error fetching articles: ', error);
       } finally {
         setLoading(false); // Set loading to false after data is fetched
       }
@@ -45,25 +55,24 @@ export default function FeaturedArticles() {
   }
 
   return (
-    <div style={{ marginTop: '5%'}}>
-      <Typography
-        variant="h4"
-        style={{ textAlign: "center", margin: "20px" }}
-      >
+    <div style={{ marginTop: '5%' }}>
+      <Typography variant="h4" style={{ textAlign: 'center', margin: '20px' }}>
         Featured Articles
       </Typography>
-      <Divider style={{ margin: "10px 0" }} />
+      <Divider style={{ margin: '10px 0' }} />
       <Grid container spacing={0}>
         {displayedArticles.map((article) => (
           <Grid item xs={12} sm={6} md={4} key={article.id}>
-            <Card sx={{ margin: "70px" }}>
-              <CardActionArea onClick={() => navigate(`/article/${article.id}`)}>
+            <Card sx={{ margin: '70px' }}>
+              <CardActionArea
+                onClick={() => navigate(`/article/${article.id}`)}
+              >
                 <CardMedia
                   component="img"
                   height="140"
                   image={article.image}
                   alt={article.title}
-                  sx={{ objectFit: "contain" }}
+                  sx={{ objectFit: 'contain' }}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -72,8 +81,12 @@ export default function FeaturedArticles() {
                   <Typography variant="body2" color="text.secondary">
                     {article.description}
                   </Typography>
-                  <Divider style={{ margin: "10px 0" }} />
-                  <Typography fontWeight={600} variant="body2" color="text.secondary">
+                  <Divider style={{ margin: '10px 0' }} />
+                  <Typography
+                    fontWeight={600}
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     {article.author}
                   </Typography>
                 </CardContent>
@@ -88,9 +101,9 @@ export default function FeaturedArticles() {
             onClick={handleToggleShowAll}
             variant="contained"
             color="primary"
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: '20px' }}
           >
-            {showAll ? "Show Less" : "See All Articles"}
+            {showAll ? 'Show Less' : 'See All Articles'}
           </Button>
         </Box>
       )}

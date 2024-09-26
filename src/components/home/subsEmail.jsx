@@ -5,50 +5,50 @@ import {
   Button,
   Box,
   Divider,
-} from "@mui/material";
-import { useState } from "react";
+} from '@mui/material';
+import { useState } from 'react';
 
 export default function SubscribeForm() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await fetch(import.meta.env.VITE_SEND_WELCOME_EMAIL, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
       });
 
       if (response.ok) {
-        alert("Welcome email sent!");
+        alert('Welcome email sent!');
       } else {
-        alert("Error sending email");
+        alert('Error sending email');
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error sending email");
+      console.error('Error:', error);
+      alert('Error sending email');
     }
   };
 
   return (
     <Container>
-      <Divider style={{ margin: "10px 0" }} />
+      <Divider style={{ margin: '10px 0' }} />
       <Container
         sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         <Typography
           variant="h5"
-          sx={{ flexGrow: 1, textAlign: "center", margin: "20px" }}
+          sx={{ flexGrow: 1, textAlign: 'center', margin: '20px' }}
         >
           Subscribe to our Newsletter
         </Typography>
@@ -56,10 +56,10 @@ export default function SubscribeForm() {
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
             gap: 2,
           }}
         >
@@ -78,7 +78,7 @@ export default function SubscribeForm() {
           </Button>
         </Box>
       </Container>
-      <Divider style={{ margin: "10px 0" }} />
+      <Divider style={{ margin: '10px 0' }} />
     </Container>
   );
 }

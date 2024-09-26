@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext } from 'react';
 import {
   Container,
   Button,
@@ -7,45 +7,47 @@ import {
   ToggleButtonGroup,
   Snackbar,
   Alert,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import { addPost } from "../../services/posts";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../configs/firebaseConfigs";
-import ArticlePost from "./ArticlePost";
-import QuestionPost from "./QuestionPost";
-import Spinner from "../misc/Spinner";
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import { addPost } from '../../services/posts';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../../configs/firebaseConfigs';
+import ArticlePost from './ArticlePost';
+import QuestionPost from './QuestionPost';
+import Spinner from '../misc/Spinner';
 
 const PostPage = () => {
-  const [postType, setPostType] = useState("question");
+  const [postType, setPostType] = useState('question');
   const [loading, setLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const navFindQuestions = () => {
-    navigate("/find-questions");
+    navigate('/find-questions');
   };
 
   // eslint-disable-next-line no-unused-vars
   const navShowArticles = () => {
     // TODO: Navigate to the show articles page
-    navigate("/show-articles");
+    navigate('/show-articles');
+  };
+
+  {
+    /* -------------------------------- HANDLE POST SUBMIT FUNCTION STARTS HERE -------------------------------- */
   }
-  
-{/* -------------------------------- HANDLE POST SUBMIT FUNCTION STARTS HERE -------------------------------- */}
   const handlePostSubmit = async (postData) => {
     if (!user) {
-      console.error("User not authenticated");
+      console.error('User not authenticated');
       return;
     }
 
     if (!postData.title || !postData.description || !postData.tags) {
-      setSnackbarMessage("All fields are required.");
-      setSnackbarSeverity("error");
+      setSnackbarMessage('All fields are required.');
+      setSnackbarSeverity('error');
       setSnackbarOpen(true);
       return;
     }
@@ -55,7 +57,10 @@ const PostPage = () => {
     try {
       let imageUrl = null;
       if (postData.image) {
-        const imageRef = ref(storage, `images/posts/articles/${postData.image.name}`);
+        const imageRef = ref(
+          storage,
+          `images/posts/articles/${postData.image.name}`
+        );
         const snapshot = await uploadBytes(imageRef, postData.image);
         imageUrl = await getDownloadURL(snapshot.ref);
       }
@@ -63,11 +68,11 @@ const PostPage = () => {
       const postWithImageUrl = { ...postData, image: imageUrl };
       await addPost(postType, postWithImageUrl, user.uid);
       setLoading(false);
-      setSnackbarMessage("Post submitted successfully!");
-      setSnackbarSeverity("success");
+      setSnackbarMessage('Post submitted successfully!');
+      setSnackbarSeverity('success');
       setSnackbarOpen(true);
-      
-      if (postType === "question") {
+
+      if (postType === 'question') {
         navFindQuestions();
       } else {
         // TODO: Navigate to the show articles page
@@ -78,25 +83,29 @@ const PostPage = () => {
     } catch (error) {
       console.error(`Error posting ${postType}: `, error);
       setLoading(false);
-      setSnackbarMessage("Error submitting post.");
-      setSnackbarSeverity("error");
+      setSnackbarMessage('Error submitting post.');
+      setSnackbarSeverity('error');
       setSnackbarOpen(true);
     }
   };
-{/* -------------------------------- HANDLE POST SUBMIT FUNCTION ENDS HERE -------------------------------- */}
+  {
+    /* -------------------------------- HANDLE POST SUBMIT FUNCTION ENDS HERE -------------------------------- */
+  }
   return (
     <Container>
-      {loading && (
-        <Spinner color="#4fa94d" text="Submitting Post..." />
-      )}
-      <div style={{ filter: loading ? "blur(5px)" : "none" }}>
+      {loading && <Spinner color="#4fa94d" text="Submitting Post..." />}
+      <div style={{ filter: loading ? 'blur(5px)' : 'none' }}>
         <Box my={2}>
-          <Button variant="contained" color="primary" onClick={navFindQuestions}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={navFindQuestions}
+          >
             Find Questions
           </Button>
         </Box>
         <PostTypeSelector postType={postType} setPostType={setPostType} />
-        {postType === "question" ? (
+        {postType === 'question' ? (
           <QuestionPost onSubmit={handlePostSubmit} />
         ) : (
           <ArticlePost onSubmit={handlePostSubmit} />
@@ -122,7 +131,7 @@ const PostPage = () => {
 const PostTypeSelector = ({ postType, setPostType }) => {
   const handlePostTypeChange = (_event, newPostType) => {
     if (newPostType !== null) {
-      console.log("Post type changed to:", newPostType); // Debugging statement
+      console.log('Post type changed to:', newPostType); // Debugging statement
       setPostType(newPostType);
     }
   };

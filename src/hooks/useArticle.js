@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { db } from "../configs/firebaseConfigs";
-import { doc, getDoc } from "firebase/firestore";
-import fetchUserDisplayName from "../utils/fetchUserDisplayName"; // Import the utility function
+import { useState, useEffect } from 'react';
+import { db } from '../configs/firebaseConfigs';
+import { doc, getDoc } from 'firebase/firestore';
+import fetchUserDisplayName from '../utils/fetchUserDisplayName'; // Import the utility function
 
 const useArticle = (articleId) => {
   const [article, setArticle] = useState(null);
 
   const fetchArticle = async () => {
-    const docRef = doc(db, "articles", articleId);
+    const docRef = doc(db, 'articles', articleId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const articleData = docSnap.data();
@@ -35,7 +35,7 @@ const useArticle = (articleId) => {
 
       setArticle({ ...articleData, comments: commentsWithDisplayNames });
     } else {
-      console.error("No such document!");
+      console.error('No such document!');
     }
   };
 
