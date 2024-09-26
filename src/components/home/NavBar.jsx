@@ -80,13 +80,13 @@ function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h2"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, fontSize: '20px', fontWeight: 700, display: { xs: 'none', sm: 'block' } }}
           >
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-              Dev@Deakin
+              Dev at Deakin
             </Link>
           </Typography>
           <FormControl
