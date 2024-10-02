@@ -113,25 +113,25 @@ If you need to deploy Firebase functions, follow these steps:
 
 1. Install Stripe by Invertase Extension in Firebase and configure API keys and Webhook endpoints (You need to sign up in Stripe and enable the Test Mode for Developers.)
 
-[!image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*pFIDaQv4La0xaBQkNqwf4g.png)
+![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*pFIDaQv4La0xaBQkNqwf4g.png)
 
 - Click on Build -> Extensions as in the above image step 1.
 - Click on Explore extensions as in the above step 2.
 - Click on Install as marked in the above step 3.
 - Once you clicked on that you’ll be navigated again to your home screen of the console.firebase.google.com. In there, click again your relevant project and you’ll be continue with the rest of the extension installation process.
 
-[!image](https://miro.medium.com/v2/resize:fit:828/format:webp/1*1XBaVf34hHAz1eOt1BkgeQ.png)
+![](https://miro.medium.com/v2/resize:fit:828/format:webp/1*1XBaVf34hHAz1eOt1BkgeQ.png)
 
 - Click next on first step as there’s nothing to setup any configs there. But feel free to go through those information.
 - In the second step you need to enable below services in order to continue.
 
-[!imge](https://miro.medium.com/v2/resize:fit:828/format:webp/1*Wi03BUAdo5cqCacS2S7eXQ.png)
+![](https://miro.medium.com/v2/resize:fit:828/format:webp/1*Wi03BUAdo5cqCacS2S7eXQ.png)
 
 - Once you done with that the Next button will be enabled and click on that.
 - Just as the first step there’s nothing to setup any configs on the third step, just click on next.
 - On the 4th step make sure to set the sync new users to stripe customers and firestore.
 
-[!image](https://miro.medium.com/v2/resize:fit:786/format:webp/1*vjl6nG-C2kEeHivx4T2ACw.png)
+![](https://miro.medium.com/v2/resize:fit:786/format:webp/1*vjl6nG-C2kEeHivx4T2ACw.png)
 
 - Add the stripe secret API key to below field which you copied from stripe dashboard.
 
