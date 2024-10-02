@@ -69,12 +69,17 @@ Ensure that your Firebase project is set up correctly. You need to configure Fir
     Edit the [`.env`] file to include your Firebase configuration.
 
     ```env
-    FIREBASE_API_KEY=<your-firebase-api-key>
-    FIREBASE_AUTH_DOMAIN=<your-firebase-auth-domain>
-    FIREBASE_PROJECT_ID=<your-firebase-project-id>
-    FIREBASE_STORAGE_BUCKET=<your-firebase-storage-bucket>
-    FIREBASE_MESSAGING_SENDER_ID=<your-firebase-messaging-sender-id>
-    FIREBASE_APP_ID=<your-firebase-app-id>
+    VITE_FIREBASE_API_KEY
+    VITE_FIREBASE_AUTH_DOMAIN
+    VITE_FIREBASE_PROJECT_ID
+    VITE_FIREBASE_STORAGE_BUCKET
+    VITE_FIREBASE_MESSAGING_SENDER_ID
+    VITE_FIREBASE_APP_ID
+    VITE_YOUTUBE_API_KEY
+    VITE_GET_USER_DISPLAY_NAME
+    VITE_SEND_WELCOME_EMAIL
+    VITE_STRIPE_PUBLISHABLE_KEY
+
     ```
 
 ## Step 5: Run the Development Server
@@ -88,7 +93,7 @@ npm run dev
 
 This will start the Vite development server and open the application in your default web browser.
 
-## Step 6: Firebase Functions Deployment (Optional)
+## Step 6: Firebase Functions Deployment
 
 If you need to deploy Firebase functions, follow these steps:
 
@@ -103,6 +108,35 @@ If you need to deploy Firebase functions, follow these steps:
     ```sh
     firebase deploy --only functions
     ```
+
+### Step 7: Stripe Configurations
+
+1. Install Stripe by Invertase Extension in Firebase and configure API keys and Webhook endpoints (You need to sign up in Stripe and enable the Test Mode for Developers.)
+
+[!image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*pFIDaQv4La0xaBQkNqwf4g.png)
+
+- Click on Build -> Extensions as in the above image step 1.
+- Click on Explore extensions as in the above step 2.
+- Click on Install as marked in the above step 3.
+- Once you clicked on that you’ll be navigated again to your home screen of the console.firebase.google.com. In there, click again your relevant project and you’ll be continue with the rest of the extension installation process.
+
+[!image](https://miro.medium.com/v2/resize:fit:828/format:webp/1*1XBaVf34hHAz1eOt1BkgeQ.png)
+
+- Click next on first step as there’s nothing to setup any configs there. But feel free to go through those information.
+- In the second step you need to enable below services in order to continue.
+
+[!imge](https://miro.medium.com/v2/resize:fit:828/format:webp/1*Wi03BUAdo5cqCacS2S7eXQ.png)
+
+- Once you done with that the Next button will be enabled and click on that.
+- Just as the first step there’s nothing to setup any configs on the third step, just click on next.
+- On the 4th step make sure to set the sync new users to stripe customers and firestore.
+
+[!image](https://miro.medium.com/v2/resize:fit:786/format:webp/1*vjl6nG-C2kEeHivx4T2ACw.png)
+
+- Add the stripe secret API key to below field which you copied from stripe dashboard.
+
+## Refer this Medium Article on setting up the rest of the Stripe related functinalities such as webhook,
+(<https://medium.com/aeturnuminc/integrate-stripe-payment-gateway-with-firebase-firestore-and-react-8ce095792491>)
 
 ## Project Structure
 
