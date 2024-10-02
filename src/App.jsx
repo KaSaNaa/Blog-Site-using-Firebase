@@ -16,6 +16,7 @@ import useThemeContext from './hooks/useTheme';
 import GlobalLayout from './GlobalLayout';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
 import FeaturedArticles from './components/home/Articles';
+import SubscriptionPage from './components/subscriptions/SubscriptionPage';
 
 const SignUp = lazy(() => import('./components/auth/SignUp'));
 const PostPage = lazy(() => import('./components/posts/Postpage'));
@@ -103,7 +104,7 @@ function App() {
                 }
               />
               <Route
-                path="/"
+                path="*"
                 element={
                   <motion.div {...pageTransition}>
                     <HomePage />
@@ -115,6 +116,14 @@ function App() {
                 element={
                   <motion.div {...pageTransition}>
                     <ArticleView />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/subscription"
+                element={
+                  <motion.div {...pageTransition}>
+                    <SubscriptionPage />
                   </motion.div>
                 }
               />

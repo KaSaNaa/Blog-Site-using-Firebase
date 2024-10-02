@@ -1,12 +1,13 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AuthProvider } from './contexts/AuthContext';
 import AppWrapper from './App';
+import { SubscriptionProvider } from './contexts/SubscriptionContext';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  
     <AuthProvider>
-      <AppWrapper />
+      <SubscriptionProvider>
+        <AppWrapper />
+      </SubscriptionProvider>
     </AuthProvider>
-  </StrictMode>
 );

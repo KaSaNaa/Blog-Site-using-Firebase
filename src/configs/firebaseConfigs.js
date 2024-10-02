@@ -6,7 +6,7 @@ import { getFunctions } from 'firebase/functions';
 
 /**
  * Firebase configuration object.
- * 
+ *
  * @type {Object}
  * @property {string} apiKey - The API key for Firebase.
  * @property {string} authDomain - The authentication domain for Firebase.
@@ -32,4 +32,4 @@ const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 const functions = getFunctions(app);
 
-export { db, storage, auth, googleProvider, githubProvider, functions };
+export { db, storage, auth, googleProvider, githubProvider, functions, app };

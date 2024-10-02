@@ -1,3 +1,4 @@
+// FILE: src/components/NavBar.jsx
 import { useContext, useState, useEffect } from 'react';
 import {
   AppBar,
@@ -19,11 +20,13 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../configs/firebaseConfigs';
 import { useThemeContext } from '../../contexts/ThemeContext'; // Correct import
+import { SubscriptionContext } from '../../contexts/SubscriptionContext'; // Import SubscriptionContext
 
 function NavBar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
   const { theme, changeTheme } = useThemeContext(); // Use ThemeContext
+  const { subscription, loading } = useContext(SubscriptionContext); // Use SubscriptionContext
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedTheme, setSelectedTheme] = useState(theme.name || 'dark');
 
@@ -53,6 +56,7 @@ function NavBar() {
       setUser(null);
       alert('Signed out successfully');
       navigate('/');
+      window.location.reload(); // Refresh the page to update everything
     } catch (error) {
       console.error('Error signing out:', error);
       alert('Error signing out');
@@ -89,24 +93,26 @@ function NavBar() {
               Dev at Deakin
             </Link>
           </Typography>
-          <FormControl
-            variant="outlined"
-            sx={{ minWidth: 120, marginRight: 2 }}
-          >
-            <InputLabel>Theme</InputLabel>
-            <Select
-              value={selectedTheme}
-              onChange={handleThemeChange}
-              label="Theme"
-              color="inherit"
+          {!loading && subscription && (
+            <FormControl
+              variant="outlined"
+              sx={{ minWidth: 120, marginRight: 2 }}
             >
-              <MenuItem value="dark">Dark</MenuItem>
-              <MenuItem value="light">Light</MenuItem>
-              <MenuItem value="twitter">Teal</MenuItem>
-              <MenuItem value="facebook">Facebook</MenuItem>
-              <MenuItem value="github">GitHub</MenuItem>
-            </Select>
-          </FormControl>
+              <InputLabel>Theme</InputLabel>
+              <Select
+                value={selectedTheme}
+                onChange={handleThemeChange}
+                label="Theme"
+                color="inherit"
+              >
+                <MenuItem value="dark">Dark</MenuItem>
+                <MenuItem value="light">Light</MenuItem>
+                <MenuItem value="twitter">Teal</MenuItem>
+                <MenuItem value="facebook">Facebook</MenuItem>
+                <MenuItem value="github">GitHub</MenuItem>
+              </Select>
+            </FormControl>
+          )}
           {user ? (
             <>
               <Avatar
@@ -123,6 +129,9 @@ function NavBar() {
               </Typography>
               <Button color="inherit" onClick={handleSignOut}>
                 Sign Out
+              </Button>
+              <Button color="inherit" onClick={() => navigate('/subscription')}>
+                Subscription
               </Button>
             </>
           ) : (

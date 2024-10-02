@@ -13,17 +13,23 @@
   "dependencies": {
     "@emotion/styled": "^11.13.0",
     "@faker-js/faker": "^9.0.0",
+    "@firebase/firestore": "^4.7.2",
     "@googleapis/youtube": "^20.0.0",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
+    "@stripe/stripe-js": "^4.6.0",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
+    "codemirror": "^5.65.18",
     "firebase": "^10.13.1",
     "framer-motion": "^11.8.0",
     "react": "^18.3.1",
+    "react-codemirror2": "^8.0.0",
     "react-dom": "^18.3.1",
     "react-loader-spinner": "^6.1.6",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.26.2",
+    "react-syntax-highlighter": "^15.5.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

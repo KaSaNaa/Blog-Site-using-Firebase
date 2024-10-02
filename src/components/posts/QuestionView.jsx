@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import {
@@ -13,6 +14,9 @@ import AnswerForm from './AnswerForm';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../configs/firebaseConfigs';
 import fetchUserDisplayName from '../../utils/fetchUserDisplayName'; // Import the utility function
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const QuestionView = ({ question }) => {
   const [answers, setAnswers] = useState([]);
@@ -65,6 +69,30 @@ const QuestionView = ({ question }) => {
               ? new Date(question.date.seconds * 1000).toLocaleDateString()
               : 'Unknown Date'}
           </Typography>
+          <Box sx={{ border: '1px solid #ccc', padding: 2, marginTop: 2 }}>
+            <ReactMarkdown
+              children={question.markdownContent}
+              components={{
+                // eslint-disable-next-line no-unused-vars
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      children={String(children).replace(/\n$/, '')}
+                      style={materialDark}
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    />
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            />
+          </Box>
           {showAnswers && (
             <Box mt={2}>
               <Typography variant="h6">Answers</Typography>
