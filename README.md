@@ -1,4 +1,4 @@
-# Dev@Deakin Project Setup Guide
+# Blog Site Project Setup Guide
 
 This guide provides step-by-step instructions to set up the Dev@Deakin project on your local machine. Follow these steps carefully to ensure a smooth setup process.
 
