@@ -45,7 +45,7 @@ function App() {
       {isLoading && <Spinner />} {/* Show spinner when loading */}
       <AnimatePresence mode="wait">
         <Suspense
-          fallback={<Spinner color="#4fa94d" text="Dev@Deakin is loading..." />}
+          fallback={<Spinner color="#4fa94d" text="Blog Site using Firebase is loading..." />}
         >
           <Routes location={location} key={location.pathname}>
             <Route element={<GlobalLayout />}>

@@ -20,7 +20,7 @@ export default function HeaderImg() {
       }}
     >
       <div className="animated-header">
-        <h1>Dev at Deakin</h1>
+        <h1>Blog Site using Firebase</h1>
       </div>
       <div className="bubbles">
         {[...Array(10)].map((_, i) => (

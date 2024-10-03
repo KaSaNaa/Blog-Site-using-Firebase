@@ -5,7 +5,7 @@ import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
  * Footer component that displays the footer section of the website.
  * 
  * The footer includes:
- * - A title "Dev at Deakin"
+ * - A title "Blog Site using Firebase"
  * - A subtitle "Empowering developers to innovate and create."
  * - Contact information including email, phone number, and a contact form link
  * - Social media icons linking to Facebook, Twitter, Instagram, and LinkedIn
@@ -27,7 +27,7 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
-          Dev at Deakin
+        Blog Site using Firebase
         </Typography>
         <Typography
           variant="subtitle1"

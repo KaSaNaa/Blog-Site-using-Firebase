@@ -83,9 +83,9 @@ const sendWelcomeEmail = firebaseFunctions.https.onRequest((req, res) => {
     const email = req.body.email;
 
     const mailOptions = {
-      from: "Dev@Deakin",
+      from: "Blog Site using Firebase",
       to: email,
-      subject: "Welcome to Dev@Deakin",
+      subject: "Welcome to Blog Site using Firebase",
       text: "Thank you for subscribing to our newsletter!",
     };
 

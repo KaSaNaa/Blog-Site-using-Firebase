@@ -90,7 +90,7 @@ function NavBar() {
             sx={{ flexGrow: 1, fontSize: '20px', fontWeight: 700, display: { xs: 'none', sm: 'block' } }}
           >
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-              Dev at Deakin
+            Blog Site - Firebase
             </Link>
           </Typography>
           {!loading && subscription && (

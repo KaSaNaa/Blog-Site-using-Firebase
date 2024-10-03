@@ -1,6 +1,6 @@
-# Dev@Deakin Project Setup Guide
+# Blog Site using Firebase Project Setup Guide
 
-This guide provides step-by-step instructions to set up the Dev@Deakin project on your local machine. Follow these steps carefully to ensure a smooth setup process.
+This guide provides step-by-step instructions to set up the Blog Site using Firebase project on your local machine. Follow these steps carefully to ensure a smooth setup process.
 
 ## Prerequisites
 

@@ -23,4 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .env
+.firebaserc
 addProducts.js
+
+.zip
+PROPOSAL.md
