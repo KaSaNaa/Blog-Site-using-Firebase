@@ -15,8 +15,8 @@ Before you begin, make sure you have the following installed on your machine:
 First, clone the repository to your local machine using Git.
 
 ```sh
-git clone https://github.com/your-username/dev-deakin.git
-cd dev-deakin
+git clone https://github.com/KaSaNaa/Blog-Site-using-Firebase.git
+cd <CLONED_FOLDER>
 ```
 
 ## Step 2: Install Dependencies
